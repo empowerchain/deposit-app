@@ -1,3 +1,6 @@
+import 'package:depositapp/views/Account.dart';
+import 'package:depositapp/views/Deposit.dart';
+import 'package:depositapp/views/Wallet.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
@@ -17,19 +20,32 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // static const List<Widget> _widgetOptions = <Widget>[ Deposit(), Wallet(), Account()];
+  static const List<Widget> _widgetOptions = <Widget>[
+    Text("Deposit"),
+    Text("Wallet"),
+    Text("Account"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage("assets/images/round-empower.png"),
-     color: null,),
+            icon: ImageIcon(
+              AssetImage("assets/images/empowerIcon.png"),
+              color: null,
+            ),
             label: 'Deposit',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.edit_note_rounded),
+            icon: ImageIcon(
+              AssetImage("assets/images/walletIcon.png"),
+              color: null,
+            ),
             label: 'Wallet',
           ),
           BottomNavigationBarItem(
@@ -37,6 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Account',
           ),
         ],
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         selectedItemColor: mainGreen[900],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
