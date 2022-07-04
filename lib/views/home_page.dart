@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -52,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        selectedItemColor: Color.fromRGBO(93, 255, 64, 1),
+        selectedItemColor: const Color.fromRGBO(93, 255, 64, 1),
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
