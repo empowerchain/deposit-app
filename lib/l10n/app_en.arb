@@ -1,0 +1,18 @@
+{
+    "account": "Account",
+    "@account": {
+      "description": "Lower bar Widget with name 'Account'"
+    },
+    "deposit": "Deposit",
+    "@deposit": {
+      "description": "Lower bar Widget with name 'Deposit'"
+    },
+    "my_vouchers": "My vouchers",
+    "@wallet": {
+      "description": "Title of vouchers list"
+    },
+    "wallet": "Wallet",
+    "@wallet": {
+      "description": "Lower bar Widget with name 'Wallet'"
+    }
+}
