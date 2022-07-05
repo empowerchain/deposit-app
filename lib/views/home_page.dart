@@ -1,4 +1,6 @@
+// import 'package:deposit_app/views/account.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -21,6 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Text("Deposit"),
     Text("Wallet"),
     Text("Account"),
+    // Account(),
   ];
 
   @override
@@ -29,24 +32,24 @@ class _MyHomePageState extends State<MyHomePage> {
       body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: ImageIcon(
+            icon: const ImageIcon(
               AssetImage("assets/images/empowerIcon.png"),
               color: null,
             ),
-            label: 'Deposit',
+            label: AppLocalizations.of(context)!.deposit,
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(
+            icon: const ImageIcon(
               AssetImage("assets/images/walletIcon.png"),
               color: null,
             ),
-            label: 'Wallet',
+            label: AppLocalizations.of(context)!.wallet,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Account',
+            icon: const Icon(Icons.account_circle),
+            label: AppLocalizations.of(context)!.account,
           ),
         ],
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
