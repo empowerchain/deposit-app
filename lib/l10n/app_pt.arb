@@ -7,6 +7,10 @@
     "@deposit": {
       "description": "Lower bar Widget with name 'Deposit'"
     },
+    "help": "Ajuda",
+    "@help": {
+      "description": "Help button in Account widget"
+    },
     "my_vouchers": "Meu vouchers",
     "@wallet": {
       "description": "Title of vouchers list"
