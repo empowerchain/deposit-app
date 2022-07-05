@@ -16,7 +16,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // static const List<Widget> _widgetOptions = <Widget>[ Deposit(), Wallet(), Account()];
   static const List<Widget> _widgetOptions = <Widget>[
     Text("Deposit"),
     Text("Wallet"),
