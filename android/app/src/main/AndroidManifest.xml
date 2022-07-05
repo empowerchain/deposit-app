@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.empowerchain.depositapp"> 
+    package="io.empowerchain.deposit_app"> 
    <application
         android:label="deposit_app"
         android:name="${applicationName}"
