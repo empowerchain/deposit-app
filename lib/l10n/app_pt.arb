@@ -7,16 +7,32 @@
     "@deposit": {
       "description": "Lower bar Widget with name 'Deposit'"
     },
+    "wallet": "Carteira",
+    "@wallet": {
+      "description": "Lower bar Widget for wallet tab"
+    },
     "help": "Ajuda",
     "@help": {
       "description": "Help button in Account widget"
     },
-    "my_vouchers": "Meu vouchers",
-    "@wallet": {
-      "description": "Title of vouchers list"
+    "mywallet": "Minha carteira",
+    "@mywallet": {
+      "description": "Upper bar Widget for wallet tab"
     },
-    "wallet": "Carteira",
-    "@wallet": {
-      "description": "Lower bar Widget with name 'Wallet'"
+    "history": "Registro",
+    "@history": {
+      "description": "Lower bar Title for operations"
+    },
+    "send": "Mandar",
+    "@send": {
+      "description": "Wallet appbar 'Send' button"
+    },
+    "voucher": "Voucher",
+    "@voucher": {
+      "description": "Wallet appbar 'Voucher' button"
+    },
+    "receive": "Receber",
+    "@receive": {
+      "description": "Wallet appbar 'Receive' button"
     }
 }
