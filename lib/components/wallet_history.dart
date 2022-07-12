@@ -1,6 +1,5 @@
 import 'package:deposit_app/dumb_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class WalletHistory extends StatefulWidget {
   const WalletHistory({super.key});
@@ -24,30 +23,28 @@ class _WalletHistoryState extends State<WalletHistory> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        details,
-                      ),
-                      const SizedBox(
-                        height: 3.0,
-                      ),
-                      Text(
-                        action,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 3.0,
-                      ),
-                      Text(
-                        date,
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 155, 155, 155)),
-                      ),
-                    ],
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      details,
+                    ),
+                    const SizedBox(
+                      height: 3.0,
+                    ),
+                    Text(
+                      action,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 3.0,
+                    ),
+                    Text(
+                      date,
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 155, 155, 155)),
+                    ),
+                  ],
                 ),
                 Text(
                   result,
@@ -73,7 +70,7 @@ class _WalletHistoryState extends State<WalletHistory> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
+      child: Container( // do not touch
         child: ListView(
           shrinkWrap: true,
           children: data.map<Widget>((order) {
