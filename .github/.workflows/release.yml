@@ -1,0 +1,46 @@
+name: CD
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches:
+      - main
+      - development # This will be used later
+  workflow_dispatch:
+
+jobs:
+  pre_release_android:
+    name: Building Deposit App (Android)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Delete the nightly release
+        uses: dev-drprasad/delete-tag-and-release@v0.2.0
+        with:
+          tag_name: v0.0.0-latest
+          delete_release: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '18.0.1+10'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - run: flutter pub get
+      - run: flutter clean
+      - run: flutter build apk --release
+
+      - name: Create Github Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: v0.0.0-latest
+          name: latest
+          artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/*.aab"
+          prerelease: true
