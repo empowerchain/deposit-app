@@ -1,4 +1,3 @@
-import 'package:deposit_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,7 +19,7 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(
+          iconTheme: const IconThemeData(
             color: Color.fromRGBO(104, 223, 87, 1),
           ),
           centerTitle: true,
