@@ -12,7 +12,8 @@ class VoucherObtained extends StatefulWidget {
 class _VoucherObtainedState extends State<VoucherObtained> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body:Padding(
+    return Scaffold(
+        body: Padding(
       padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
       child: Container(
         child: Column(
@@ -23,14 +24,24 @@ class _VoucherObtainedState extends State<VoucherObtained> {
               padding: const EdgeInsets.all(25.0),
               child: Image.asset(
                 'assets/images/receive_voucher.png',
-                width: MediaQuery.of(context).size.width-50,
+                width: MediaQuery.of(context).size.width - 50,
                 fit: BoxFit.cover,
               ),
             ),
             Text(
               AppLocalizations.of(context)!.congratulations,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22.0,
+              ),
+            ),
+            const SizedBox(
+              height: 20.0,
             ),
             Text(widget.code),
+            const SizedBox(
+              height: 80.0,
+            ),
             ElevatedButton(
               // onPressed: (() => debugPrint("QrCode")),
               onPressed: () => Navigator.pop(context),
