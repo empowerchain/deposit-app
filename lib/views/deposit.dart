@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:deposit_app/views/voucher_obtained.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,9 +36,19 @@ class _DepositState extends State<Deposit> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-    setState(() {
-      _scanBarcode = barcodeScanRes;
-    });
+    setState(
+      () {
+        _scanBarcode = barcodeScanRes;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VoucherObtained(
+              barcodeScanRes,
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -69,8 +80,8 @@ class _DepositState extends State<Deposit> {
                 ),
               ),
             ),
-            Text('Scan result : $_scanBarcode\n',
-                style: TextStyle(fontSize: 20))
+            // Text('Scan result : $_scanBarcode\n',
+            //     style: TextStyle(fontSize: 20))
           ],
         ),
       ),
