@@ -7,6 +7,10 @@
     "@deposit": {
       "description": "Lower bar Widget with name 'Deposit'"
     },
+    "claimDepositReward": "Reivindicar Recompensa de Depósito",
+    "@claimDepositReward": {
+      "description": "Button for Deposit tab"
+    },
     "wallet": "Carteira",
     "@wallet": {
       "description": "Lower bar Widget for wallet tab"

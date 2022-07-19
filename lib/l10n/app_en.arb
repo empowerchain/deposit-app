@@ -7,6 +7,10 @@
     "@deposit": {
       "description": "Lower bar Widget with name 'Deposit'"
     },
+    "claimDepositReward": "Claim Deposit Reward",
+    "@claimDepositReward": {
+      "description": "Button for Deposit tab"
+    },
     "wallet": "Wallet",
     "@wallet": {
       "description": "Lower bar Widget for wallet tab"
