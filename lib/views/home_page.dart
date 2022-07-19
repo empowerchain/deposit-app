@@ -1,4 +1,5 @@
 import 'package:deposit_app/views/account.dart';
+import 'package:deposit_app/views/deposit.dart';
 import 'package:deposit_app/views/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text("Deposit"),
+    Deposit(),
     Wallet(),
     Account(),
   ];
