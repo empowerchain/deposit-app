@@ -1,4 +1,5 @@
 // import 'package:deposit_app/views/vouchers.dart';
+import 'package:deposit_app/login.dart';
 import 'package:flutter/material.dart';
 import 'views/home_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: Scaffold(body: Web3Register()),
     );
   }
 }
