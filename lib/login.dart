@@ -11,8 +11,9 @@ class Web3Register extends StatefulWidget {
 }
 
 class _Web3Register extends State<Web3Register> {
+  var mailController = TextEditingController();
   String _result = '<empty>';
-  bool logoutVisible = false;
+  String _mail = '';
 
   @override
   void initState() {
@@ -34,6 +35,39 @@ class _Web3Register extends State<Web3Register> {
     );
   }
 
+  Widget buttonLogo(String assetImage, void Function() networkFunction) {
+    return InkWell(
+      onTap: networkFunction,
+      child: Ink.image(
+        image: AssetImage(assetImage),
+        width: 60,
+        height: 60,
+      ),
+    );
+  }
+
+  Widget infoSeparator(String message) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 34.0),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              message,
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 30.0, right: 30.0),
+          child: Divider(
+            color: Colors.black,
+          ),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,100 +79,95 @@ class _Web3Register extends State<Web3Register> {
           const Text(
             "LOG IN",
             style: TextStyle(
-              color: Color.fromRGBO(104, 223, 87, 1),
-              fontWeight: FontWeight.bold,
-              fontSize: 24
-            ),
+                color: Color.fromRGBO(104, 223, 87, 1),
+                fontWeight: FontWeight.bold,
+                fontSize: 24),
           ),
-          SizedBox(
+          const SizedBox(
             height: 50.0,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 16),
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: infoSeparator(
+              AppLocalizations.of(context)!.socialNetworks,
+            ),
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buttonLogo(
+                    "assets/logos/login-google.png", _login(_withGoogle)),
+                const SizedBox(
+                  width: 30.0,
+                ),
+                buttonLogo(
+                    "assets/logos/login-facebook.png", _login(_withFacebook)),
+                const SizedBox(
+                  width: 30.0,
+                ),
+                buttonLogo(
+                    "assets/logos/login-twitter.png", _login(_withTwitter)),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: infoSeparator("Use email"),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 16),
             child: TextField(
-              style: TextStyle(fontSize: 20),
-              decoration: InputDecoration(
+              controller: mailController,
+              onChanged: (text) {
+                _mail = text;
+              },
+              style: const TextStyle(fontSize: 18),
+              decoration: const InputDecoration(
                 contentPadding:
-                    const EdgeInsets.only(left: 24.0, bottom: 16.0, top: 16.0),
+                    EdgeInsets.only(left: 20.0, bottom: 8.0, top: 8.0),
                 fillColor: Color(0xFFF5F6F7),
                 filled: true,
-                border: OutlineInputBorder(),
+                border: InputBorder.none,
                 hintText: 'mail@empower.com',
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: _login(_withGoogle),
-                    child: Ink.image(
-                      image: const AssetImage("assets/logos/login-google.png"),
-                      width: 60,
-                      height: 60,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: _login(_withFacebook),
-                    child: Ink.image(
-                      image:
-                          const AssetImage("assets/logos/login-facebook.png"),
-                      width: 60,
-                      height: 60,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: _login(_withTwitter),
-                    child: Ink.image(
-                      image: const AssetImage("assets/logos/login-twitter.png"),
-                      width: 60,
-                      height: 60,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+
           SizedBox(
-            height: 50,
-          ),
-          Visibility(
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.red // This is what you need!
+            width: 300.0, // <-- match_parent
+            height: 50.0, // <-
+            child: SizedBox.expand(
+              child: ElevatedButton(
+                // onPressed: (() => debugPrint("QrCode")),
+                onPressed: _login(_withMail),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
                     ),
-                onPressed: _logout(),
-                child: const Text('Logout')),
-            visible: logoutVisible,
-          ),
-          ElevatedButton(
-            // onPressed: (() => debugPrint("QrCode")),
-            onPressed: _login(_withGoogle),
-            style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0),
+                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromRGBO(104, 223, 87, 1)),
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.doneLogin,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
                 ),
               ),
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  const Color.fromRGBO(104, 223, 87, 1)),
-              minimumSize: MaterialStateProperty.all<Size>(Size(300, 40)),
-            ),
-            child: Text(
-              AppLocalizations.of(context)!.doneLogin,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0,
-              ),
             ),
           ),
-          // Text('Scan result : $_scanBarcode\n',
-          //     style: TextStyle(fontSize: 20))
+          Text('Scan result : $_result\n',
+              style: TextStyle(fontSize: 20))
         ],
       ),
     );
@@ -150,24 +179,8 @@ class _Web3Register extends State<Web3Register> {
       try {
         final Web3AuthResponse response = await method();
         setState(() {
-          _result = response.toString();
-          logoutVisible = true;
-        });
-      } on UserCancelledException {
-        print("User cancelled.");
-      } on UnKnownException {
-        print("Unknown exception occurred");
-      }
-    };
-  }
-
-  VoidCallback _logout() {
-    return () async {
-      try {
-        await Web3AuthFlutter.logout();
-        setState(() {
-          _result = '<empty>';
-          logoutVisible = false;
+          var privKey = response.privKey;
+          _result = privKey.toString();
         });
       } on UserCancelledException {
         print("User cancelled.");
@@ -190,5 +203,13 @@ class _Web3Register extends State<Web3Register> {
   Future<Web3AuthResponse> _withTwitter() {
     return Web3AuthFlutter.login(
         provider: Provider.twitter, mfaLevel: MFALevel.MANDATORY);
+  }
+
+  Future<Web3AuthResponse> _withMail() {
+    return Web3AuthFlutter.login(
+      provider: Provider.email_passwordless,
+      mfaLevel: MFALevel.MANDATORY,
+      extraLoginOptions: ExtraLoginOptions(login_hint: _mail),
+    );
   }
 }
