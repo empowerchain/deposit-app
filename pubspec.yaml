@@ -27,6 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  web3auth_flutter:
+    git: https://github.com/Web3Auth/web3auth-flutter-sdk.git
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -70,6 +72,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/logos/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
