@@ -19,6 +19,14 @@
     "@done": {
       "description": "Done button after voucher received"
     },
+    "doneLogin": "Entrar",
+    "@done": {
+      "description": "Done button for Login"
+    },
+    "socialNetworks": "Use redes sociais",
+    "@done": {
+      "description": "String for networks in log in view"
+    },
     "wallet": "Carteira",
     "@wallet": {
       "description": "Lower bar Widget for wallet tab"
