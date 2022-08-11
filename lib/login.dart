@@ -1,8 +1,11 @@
+import 'package:deposit_app/crypto_functions.dart';
 import 'package:flutter/material.dart';
 import 'dart:collection';
 import 'dart:async';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:secp256k1/secp256k1.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web3auth_flutter/web3auth_flutter.dart';
 
 class Web3Register extends StatefulWidget {
@@ -11,9 +14,11 @@ class Web3Register extends StatefulWidget {
 }
 
 class _Web3Register extends State<Web3Register> {
+  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   var mailController = TextEditingController();
-  String _result = '<empty>';
+  String? _result;
   String _mail = '';
+  String _name = '';
 
   @override
   void initState() {
@@ -29,7 +34,7 @@ class _Web3Register extends State<Web3Register> {
       clientId:
           'BCTraDCiou6NAUmfMhvL8zS0RTfV07Tvj4iuRwhYHneJyQWakx8i6rZ12p_n021XzCcjcSdcHBY2qU-WD3MPpfA',
       network: Network.testnet,
-      redirectUri: 'com.example.depositapp://auth',
+      redirectUri: 'io.empowerchain.depositapp://auth',
       whiteLabelData: WhiteLabelData(
           dark: true, name: "flutterdepositapp", theme: themeMap),
     );
@@ -74,7 +79,7 @@ class _Web3Register extends State<Web3Register> {
       child: Column(
         children: [
           const SizedBox(
-            height: 100.0,
+            height: 60.0,
           ),
           const Text(
             "LOG IN",
@@ -139,7 +144,6 @@ class _Web3Register extends State<Web3Register> {
           const SizedBox(
             height: 20,
           ),
-
           SizedBox(
             width: 300.0, // <-- match_parent
             height: 50.0, // <-
@@ -166,8 +170,6 @@ class _Web3Register extends State<Web3Register> {
               ),
             ),
           ),
-          Text('Scan result : $_result\n',
-              style: TextStyle(fontSize: 20))
         ],
       ),
     );
@@ -178,10 +180,16 @@ class _Web3Register extends State<Web3Register> {
     return () async {
       try {
         final Web3AuthResponse response = await method();
+        final prefs = await SharedPreferences.getInstance();
+        var privKey = response.privKey;
+        String authToken = createToken(privKey);
+        await prefs.setString('token', authToken);
         setState(() {
-          var privKey = response.privKey;
-          _result = privKey.toString();
+          _result = prefs.getString('token');
+          _mail = response.userInfo.email.toString();
+          _name = response.userInfo.name.toString();
         });
+        await Navigator.pushNamed(context, "/homepage");
       } on UserCancelledException {
         print("User cancelled.");
       } on UnKnownException {
