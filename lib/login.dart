@@ -182,8 +182,11 @@ class _Web3Register extends State<Web3Register> {
         final Web3AuthResponse response = await method();
         final prefs = await SharedPreferences.getInstance();
         var privKey = response.privKey;
+        var privHex = PrivateKey.fromHex(privKey);
+        var pubKey = privHex.publicKey.toCompressedHex();
         String authToken = createToken(privKey);
         await prefs.setString('token', authToken);
+        await prefs.setString('public-key', pubKey);
         setState(() {
           _result = prefs.getString('token');
           _mail = response.userInfo.email.toString();
