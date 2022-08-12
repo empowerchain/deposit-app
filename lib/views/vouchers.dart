@@ -1,16 +1,35 @@
+import 'package:deposit_app/api_functions.dart';
 import 'package:deposit_app/classes/voucher.dart';
 import 'package:deposit_app/components/vouchers_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Vouchers extends StatefulWidget {
-  const Vouchers({super.key});
+  final String? token;
+
+  const Vouchers(
+    this.token, {
+    super.key,
+  });
 
   @override
   State<Vouchers> createState() => _VouchersState();
 }
 
 class _VouchersState extends State<Vouchers> {
+  Map<String,dynamic> content = {};
+
+  @override
+  void initState() {
+    getVouchers(widget.token).then(
+      (value) {
+        setState(() {
+          content = value;
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
