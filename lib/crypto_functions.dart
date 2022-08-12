@@ -9,7 +9,6 @@ String createToken(String privKey) {
       privateKey.publicKey.toCompressedHex(); // Public key in Hex
 
   // Until here everything identical
-
   var payloadJson = {
     "pubKey": pubKeyHex,
     "client": "empower-deposit-app",
@@ -40,7 +39,7 @@ String createToken(String privKey) {
 
   Map token = {
     "payload": payloadAsBase64,
-    "signature": signature.toRawHex() // <--- TODO: token here
+    "signature": signature.toRawHex()
   };
 
   String jsonStringifyToken = json.encode(token);
