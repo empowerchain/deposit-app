@@ -40,13 +40,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_barcode_scanner: ^2.0.0
   crypto: ^3.0.2
-  secp256k1: ^0.3.0
+  elliptic: ^0.3.8
+  ecdsa: 0.0.4
   shared_preferences: ^2.0.15
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_native_splash: ^2.2.4
+  test:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

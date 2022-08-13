@@ -2,9 +2,8 @@ import 'package:deposit_app/crypto_functions.dart';
 import 'package:flutter/material.dart';
 import 'dart:collection';
 import 'dart:async';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:secp256k1/secp256k1.dart';
+import 'package:elliptic/elliptic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web3auth_flutter/web3auth_flutter.dart';
 
@@ -182,7 +181,8 @@ class _Web3Register extends State<Web3Register> {
         final Web3AuthResponse response = await method();
         final prefs = await SharedPreferences.getInstance();
         var privKey = response.privKey;
-        var privHex = PrivateKey.fromHex(privKey);
+        var ec = getS256();
+        var privHex = PrivateKey.fromHex(ec, privKey);
         var pubKey = privHex.publicKey.toCompressedHex();
         String authToken = createToken(privKey);
         await prefs.setString('token', authToken);
