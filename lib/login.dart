@@ -91,7 +91,7 @@ class _Web3Register extends State<Web3Register> {
             height: 50.0,
           ),
           Padding(
-            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: infoSeparator(
               AppLocalizations.of(context)!.socialNetworks,
             ),
