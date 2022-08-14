@@ -3,17 +3,23 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-Future<Map<String, dynamic>> getVouchers(String? token) async {
+Future<List<dynamic>> getVouchersForUser(
+    String? userPubKey, String? token) async {
   String currentToken = "Bearer $token";
+  final body = jsonEncode({"UserPubKey": userPubKey});
 
   final response = await http.post(
-      Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.GetAllVouchers'),
-      headers: {"Authorization": currentToken});
+    Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.GetAllVouchers'),
+    headers: {"Authorization": currentToken},
+    body: body,
+  );
+
+  Map<String,dynamic> vouchers = jsonDecode(response.body);
   if (response.statusCode == 200) {
-    Map<String, dynamic> content = jsonDecode(response.body);
-    return content;
+    List<dynamic> content = vouchers["vouchers"];
+    return vouchers["vouchers"];
   } else {
-    return {};
+    return [];
   }
 }
 
@@ -48,8 +54,12 @@ Future<Map<String, dynamic>> depositClaim(
   }
 }
 
-Future<String?> getToken() async {
+Future<Map<String, String>> getPreferences() async {
   final prefs = await SharedPreferences.getInstance();
-  final String? token = prefs.getString('token');
-  return token;
+  final String token = prefs.getString('token') as String;
+  final String pubKey = prefs.getString('public-key') as String;
+  return {
+    "token": token,
+    "pubKey": pubKey,
+  };
 }
