@@ -1,5 +1,7 @@
+import 'package:deposit_app/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -9,6 +11,7 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   var originalAddress = "cosmos19r3jlewte0mfazu9p2u5nn9j63c8mtw0h7h2rg";
 
   @override
@@ -58,9 +61,9 @@ class _AccountState extends State<Account> {
           Row(
             children: [
               const SizedBox(width: 25.0),
-              SizedBox(
+              const SizedBox(
                 height: 50.0,
-                child: const ImageIcon(
+                child: ImageIcon(
                   AssetImage("assets/images/questionIcon.png"),
                   color: Color.fromRGBO(103, 224, 86, 1),
                   size: 30.0,
@@ -85,14 +88,22 @@ class _AccountState extends State<Account> {
           ),
           const SizedBox(height: 10.0),
           Row(
-            children: const [
-              SizedBox(width: 25.0),
-              Text(
-                "Log out",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 169, 169, 169),
+            children: [
+              const SizedBox(width: 25.0),
+              GestureDetector(
+                child: const Text(
+                  "Log out",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 169, 169, 169),
+                  ),
                 ),
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.clear().then(
+                        (value) => Navigator.pop(context),
+                      );
+                },
               ),
             ],
           )

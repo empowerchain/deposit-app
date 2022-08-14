@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:deposit_app/api_functions.dart';
 import 'package:deposit_app/views/voucher_obtained.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Deposit extends StatefulWidget {
   const Deposit({super.key});
@@ -14,10 +16,15 @@ class Deposit extends StatefulWidget {
 
 class _DepositState extends State<Deposit> {
   String _scanBarcode = 'Unknown'; // Where QR info is contained
+  String token = '';
+  String? publicKey;
 
   @override
   void initState() {
     super.initState();
+    getPreferences().then((value) {
+      token = value["token"] as String;
+    });
   }
 
   Future<void> scanQR() async {
@@ -26,9 +33,10 @@ class _DepositState extends State<Deposit> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
-      print(barcodeScanRes);
+      List scanSplit = barcodeScanRes.split('=');
+      barcodeScanRes = scanSplit[1];
     } on PlatformException {
-      barcodeScanRes = 'Failed to get platform version.';
+      barcodeScanRes = '';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -39,12 +47,11 @@ class _DepositState extends State<Deposit> {
     setState(
       () {
         _scanBarcode = barcodeScanRes;
+        print(_scanBarcode);
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => VoucherObtained(
-              barcodeScanRes,
-            ),
+            builder: (context) => VoucherObtained(barcodeScanRes, token),
           ),
         );
       },

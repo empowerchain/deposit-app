@@ -1,15 +1,41 @@
+import 'package:deposit_app/api_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class VoucherObtained extends StatefulWidget {
   final String code;
-  const VoucherObtained(this.code, {super.key});
+  final String token;
+  const VoucherObtained(
+    this.code,
+    this.token, {
+    super.key,
+  });
 
   @override
   State<VoucherObtained> createState() => _VoucherObtainedState();
 }
 
 class _VoucherObtainedState extends State<VoucherObtained> {
+  Map<String, dynamic> content = {};
+  String publicKey = '';
+  @override
+  void initState() {
+    SharedPreferences.getInstance().then((value) {
+      setState(() {
+        publicKey = value.getString("public-key") as String;
+      });
+
+      depositClaim(widget.token, publicKey, widget.code).then(
+        (value) {
+          setState(() {
+            content = value;
+          });
+        },
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

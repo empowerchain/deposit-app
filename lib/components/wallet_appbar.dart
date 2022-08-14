@@ -1,6 +1,8 @@
+import 'package:deposit_app/api_functions.dart';
 import 'package:deposit_app/views/vouchers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WalletAppBar extends StatefulWidget {
   const WalletAppBar({super.key});
@@ -10,6 +12,19 @@ class WalletAppBar extends StatefulWidget {
 }
 
 class _WalletAppBarState extends State<WalletAppBar> {
+  String? token = '';
+  String? userPubKey = '';
+
+  @override
+  void initState() {
+    getPreferences().then(
+      (value) => setState(() {
+        token = value["token"] as String;
+        userPubKey = value["pubKey"] as String;
+      }),
+    );
+  }
+
   Widget textWallet(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(5.0, 0, 30.0, 0),
@@ -63,11 +78,10 @@ class _WalletAppBarState extends State<WalletAppBar> {
           AppLocalizations.of(context)!.receive,
           const Text("None"),
         ),
-        buttonWidget(
+        buttonVouchers(
           context,
           "assets/images/voucherIcon.png",
           AppLocalizations.of(context)!.voucher,
-          const Vouchers(),
         ),
       ],
     );
@@ -113,19 +127,26 @@ class _WalletAppBarState extends State<WalletAppBar> {
     );
   }
 
-  Widget buttonWidget2(
+  Widget buttonVouchers(
       BuildContext context, final String asset, final String title) {
-    return Container(
-      margin: const EdgeInsets.only(left: 5.0, right: 5.0),
-      color: Colors.white,
-      child: SizedBox(
-        height: 95.0,
-        width: 95.0,
-        child: Padding(
-          padding: const EdgeInsets.all(22.0),
-          child: Container(
-            color: Colors.white,
-            child: Column(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Vouchers(token, userPubKey)),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              color: Colors.white,
+              height: 70.0,
+              width: 70.0,
+            ),
+            Column(
               children: [
                 ImageIcon(
                   AssetImage(asset),
@@ -140,7 +161,7 @@ class _WalletAppBarState extends State<WalletAppBar> {
                 ),
               ],
             ),
-          ),
+          ],
         ),
       ),
     );

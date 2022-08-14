@@ -1,4 +1,4 @@
-package io.empowerchain.deposit_app
+package io.empowerchain.depositapp
 
 import io.flutter.embedding.android.FlutterActivity
 

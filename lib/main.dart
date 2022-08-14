@@ -1,4 +1,3 @@
-// import 'package:deposit_app/views/vouchers.dart';
 import 'package:deposit_app/login.dart';
 import 'package:flutter/material.dart';
 import 'views/home_page.dart';
@@ -12,6 +11,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Deposit App',
+      home: Scaffold(body: Web3Register()),
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/login': (context) => Web3Register(),
+        '/homepage': (context) => const HomePage(),
+      },
       locale: const Locale('pt'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -27,7 +33,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(body: Web3Register()),
     );
   }
 }
