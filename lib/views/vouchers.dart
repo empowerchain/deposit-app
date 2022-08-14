@@ -6,8 +6,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Vouchers extends StatefulWidget {
   final String? token;
+  final String? userPubKey;
 
   const Vouchers(
+    this.userPubKey,
     this.token, {
     super.key,
   });
@@ -17,19 +19,6 @@ class Vouchers extends StatefulWidget {
 }
 
 class _VouchersState extends State<Vouchers> {
-  Map<String,dynamic> content = {};
-
-  @override
-  void initState() {
-    getVouchers(widget.token).then(
-      (value) {
-        setState(() {
-          content = value;
-        });
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,37 +35,42 @@ class _VouchersState extends State<Vouchers> {
         ),
         backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
       ),
-      body: Container(
-        child: ListView(
-          children: [
-            VoucherItem(
-              key: UniqueKey(),
-              Voucher("Coupon1", "Amazing promo 123", "123",
-                  'assets/images/voucherPlaceholder.png', false),
-            ),
-            VoucherItem(
-              key: UniqueKey(),
-              Voucher("Coupon2", "Amazing promo 456", "456",
-                  'assets/images/voucherPlaceholder.png', false),
-            ),
-            VoucherItem(
-              key: UniqueKey(),
-              Voucher("Coupon3", "Amazing promo 789", "789",
-                  'assets/images/voucherPlaceholder.png', false),
-            ),
-            VoucherItem(
-              key: UniqueKey(),
-              Voucher("Coupon4", "Amazing promo 098", "098",
-                  'assets/images/voucherPlaceholder.png', false),
-            ),
-            VoucherItem(
-              key: UniqueKey(),
-              Voucher("Coupon5", "Amazing promo 321", "321",
-                  'assets/images/voucherPlaceholder.png', false),
-            ),
-          ],
-        ),
+      body: FutureBuilder(
+        initialData: null,
+        future: _getVouchers(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                child: const CircularProgressIndicator());
+          }
+
+          return ListView(
+            children: snapshot.data,
+          );
+        },
       ),
     );
+  }
+
+  Future<List<Widget>> _getVouchers() async {
+    final vouchersAvailable =
+        await getVouchersForUser(widget.userPubKey, widget.token);
+
+    return vouchersAvailable.map(
+      (item) {
+        Map voucherData = item["voucher"];
+        Map voucherDefinition = item["voucherDefinition"];
+        Voucher voucher = Voucher(
+          voucherData["voucherDefinitionID"],
+          voucherData["id"],
+          voucherDefinition["name"],
+          'assets/images/voucherPlaceholder.png',
+          voucherData["invalidated"],
+        );
+        return VoucherItem(voucher);
+      },
+    ).toList();
   }
 }
