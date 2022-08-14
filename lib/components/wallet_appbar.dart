@@ -13,12 +13,14 @@ class WalletAppBar extends StatefulWidget {
 
 class _WalletAppBarState extends State<WalletAppBar> {
   String? token = '';
+  String? userPubKey = '';
 
   @override
   void initState() {
-    getToken().then(
+    getPreferences().then(
       (value) => setState(() {
-        token = value;
+        token = value["token"] as String;
+        userPubKey = value["pubKey"] as String;
       }),
     );
   }
@@ -131,7 +133,7 @@ class _WalletAppBarState extends State<WalletAppBar> {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Vouchers(token)),
+          MaterialPageRoute(builder: (context) => Vouchers(token, userPubKey)),
         );
       },
       child: Padding(
