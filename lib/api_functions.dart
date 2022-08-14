@@ -24,21 +24,22 @@ Future<Map<String, dynamic>> depositClaim(
 ) async {
   String currentToken = "Bearer $token";
 
-  final Map<String, String> header = {"Authorization": currentToken};
-
-  final Map<String, dynamic> body = {
-    "depositID": code,
-    "userPubKey": publicKey
+  final Map<String, String> header = {
+    "Authorization": currentToken,
+    'Access-Control-Allow-Origin': "*",
+    'Access-Control-Allow-Methods': 'GET, POST',
+    "Access-Control-Allow-Headers": "X-Requested-With",
+    "content-type": "application/json"
   };
 
-  print(header);
-  print(body);
+  final body = jsonEncode({"DepositID": code, "UserPubKey": publicKey});
 
   final response = await http.post(
-      Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.Claim'),
-      headers: header,
-      body: body);
-  print(response.body);
+    Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.Claim'),
+    headers: header,
+    body: body,
+  );
+
   if (response.statusCode == 200) {
     Map<String, dynamic> content = jsonDecode(response.body);
     return content;
