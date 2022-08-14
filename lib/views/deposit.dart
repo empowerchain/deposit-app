@@ -22,8 +22,8 @@ class _DepositState extends State<Deposit> {
   @override
   void initState() {
     super.initState();
-    getToken().then((value) {
-      token = value as String;
+    getPreferences().then((value) {
+      token = value["token"] as String;
     });
   }
 
