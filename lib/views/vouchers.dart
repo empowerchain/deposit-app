@@ -1,6 +1,6 @@
-import 'package:deposit_app/api_functions.dart';
-import 'package:deposit_app/classes/voucher.dart';
-import 'package:deposit_app/components/vouchers_display.dart';
+import 'package:depositapp/api_functions.dart';
+import 'package:depositapp/classes/voucher.dart';
+import 'package:depositapp/components/vouchers_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

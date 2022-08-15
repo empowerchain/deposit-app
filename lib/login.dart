@@ -1,4 +1,4 @@
-import 'package:deposit_app/crypto_functions.dart';
+import 'package:depositapp/crypto_functions.dart';
 import 'package:flutter/material.dart';
 import 'dart:collection';
 import 'dart:async';
@@ -32,7 +32,7 @@ class _Web3Register extends State<Web3Register> {
     await Web3AuthFlutter.init(
       clientId:
           'BCTraDCiou6NAUmfMhvL8zS0RTfV07Tvj4iuRwhYHneJyQWakx8i6rZ12p_n021XzCcjcSdcHBY2qU-WD3MPpfA',
-      network: Network.testnet,
+      network: Network.mainnet,
       redirectUri: 'io.empowerchain.depositapp://auth',
       whiteLabelData: WhiteLabelData(
           dark: true, name: "flutterdepositapp", theme: themeMap),

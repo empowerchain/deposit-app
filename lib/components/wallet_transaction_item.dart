@@ -1,4 +1,4 @@
-import 'package:deposit_app/classes/transaction.dart';
+import 'package:depositapp/classes/transaction.dart';
 import 'package:flutter/material.dart';
 
 class TransactionItem extends StatefulWidget {

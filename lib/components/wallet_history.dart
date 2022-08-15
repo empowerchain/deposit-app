@@ -1,5 +1,5 @@
-import 'package:deposit_app/components/wallet_transaction_item.dart';
-import 'package:deposit_app/dumb_data.dart';
+import 'package:depositapp/components/wallet_transaction_item.dart';
+import 'package:depositapp/dumb_data.dart';
 import 'package:flutter/material.dart';
 
 class WalletHistory extends StatefulWidget {

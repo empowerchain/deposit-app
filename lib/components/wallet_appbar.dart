@@ -1,5 +1,5 @@
-import 'package:deposit_app/api_functions.dart';
-import 'package:deposit_app/views/vouchers.dart';
+import 'package:depositapp/api_functions.dart';
+import 'package:depositapp/views/vouchers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';

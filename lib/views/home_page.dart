@@ -1,6 +1,6 @@
-import 'package:deposit_app/views/account.dart';
-import 'package:deposit_app/views/deposit.dart';
-import 'package:deposit_app/views/wallet.dart';
+import 'package:depositapp/views/account.dart';
+import 'package:depositapp/views/deposit.dart';
+import 'package:depositapp/views/wallet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

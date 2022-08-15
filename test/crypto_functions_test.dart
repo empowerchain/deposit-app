@@ -1,5 +1,5 @@
 @Timeout(Duration(seconds: 120))
-import 'package:deposit_app/crypto_functions.dart';
+import 'package:depositapp/crypto_functions.dart';
 import 'package:test/test.dart';
 import 'dart:convert';
 import 'package:elliptic/elliptic.dart';

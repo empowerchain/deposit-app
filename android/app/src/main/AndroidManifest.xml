@@ -2,7 +2,7 @@
     package="io.empowerchain.depositapp"> 
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="deposit_app"
+        android:label="depositapp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -23,10 +23,12 @@
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.LAUNCHER"/>
                 <data android:scheme="io.empowerchain.depositapp" />
             </intent-filter>
         </activity>

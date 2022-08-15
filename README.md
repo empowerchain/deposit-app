@@ -1,4 +1,4 @@
-# deposit_app
+# depositapp
 
 A new Flutter project.
 
