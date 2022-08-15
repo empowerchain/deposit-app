@@ -9,7 +9,7 @@ Future<List<dynamic>> getVouchersForUser(
   final body = jsonEncode({"UserPubKey": userPubKey});
 
   final response = await http.post(
-    Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.GetAllVouchers'),
+    Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.GetVouchersForUser'),
     headers: {"Authorization": currentToken},
     body: body,
   );
