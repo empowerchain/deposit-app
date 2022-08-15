@@ -584,8 +584,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: c80b4d457f6fb536ed5e8923559e72b783df1b80
-      url: "https://github.com/Web3Auth/web3auth-flutter-sdk.git"
+      resolved-ref: c30c065296d422b5f3866993181677692e03f00b
+      url: "https://github.com/bjaanes/web3auth-flutter-sdk.git"
     source: git
     version: "0.0.2"
   web_socket_channel:
