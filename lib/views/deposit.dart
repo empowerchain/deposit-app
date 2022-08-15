@@ -34,7 +34,12 @@ class _DepositState extends State<Deposit> {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
       List scanSplit = barcodeScanRes.split('=');
-      barcodeScanRes = scanSplit[1];
+      if (scanSplit.length > 1){
+        barcodeScanRes = scanSplit[1];
+      }
+      else{
+        barcodeScanRes = '';
+      }
     } on PlatformException {
       barcodeScanRes = '';
     }
