@@ -58,5 +58,13 @@
     "receive": "Receive",
     "@receive": {
       "description": "Wallet appbar 'Receive' button"
+    },
+    "markasused": "Mark as used",
+    "@markasused": {
+      "description": "button for vouchers page view"
+    },
+    "code": "Code",
+    "@code": {
+      "description": "'Code' word for voucher list"
     }
 }
