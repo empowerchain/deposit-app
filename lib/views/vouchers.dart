@@ -9,8 +9,8 @@ class Vouchers extends StatefulWidget {
   final String? userPubKey;
 
   const Vouchers(
-    this.userPubKey,
-    this.token, {
+    this.token,
+    this.userPubKey, {
     super.key,
   });
 
@@ -57,16 +57,15 @@ class _VouchersState extends State<Vouchers> {
   Future<List<Widget>> _getVouchers() async {
     final vouchersAvailable =
         await getVouchersForUser(widget.userPubKey, widget.token);
-
     return vouchersAvailable.map(
       (item) {
         Map voucherData = item["voucher"];
         Map voucherDefinition = item["voucherDefinition"];
         Voucher voucher = Voucher(
-          voucherData["voucherDefinitionID"],
           voucherData["id"],
+          voucherData["voucherDefinitionID"],
           voucherDefinition["name"],
-          'assets/images/voucherPlaceholder.png',
+          voucherDefinition["pictureURL"],
           voucherData["invalidated"],
         );
         return VoucherItem(voucher);
