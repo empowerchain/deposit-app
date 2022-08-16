@@ -107,17 +107,44 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                       MaterialStateProperty.all<Size>(const Size(300, 40)),
                 ),
                 onPressed: !activated
-                    ? () async {
-                        print("200");
-                        print(widget.voucher.code);
-                        await invalidateVoucher(widget.voucher.code, token)
-                            .then(
-                          (value) => setState(() {
-                            activated = true;
-                          }),
-                        );
-                        print(activated);
-                      }
+                    ? () => showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: Text(AppLocalizations.of(context)!
+                                .confirmationtitle),
+                            content: Text(
+                                '${AppLocalizations.of(context)!.confirmationtext} ${widget.voucher.code}?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(
+                                      context,
+                                      AppLocalizations.of(context)!
+                                          .confirmationno);
+                                },
+                                child: Text(AppLocalizations.of(context)!
+                                    .confirmationno),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  await invalidateVoucher(
+                                          widget.voucher.code, token)
+                                      .then((value) {
+                                    setState(() {
+                                      activated = true;
+                                    });
+                                    Navigator.pop(
+                                        context,
+                                        AppLocalizations.of(context)!
+                                            .confirmationyes);
+                                  });
+                                },
+                                child: Text(AppLocalizations.of(context)!
+                                    .confirmationyes),
+                              ),
+                            ],
+                          ),
+                        )
                     : null,
                 child: Text(
                   AppLocalizations.of(context)!.markasused,
