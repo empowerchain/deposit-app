@@ -58,5 +58,29 @@
     "receive": "Receive",
     "@receive": {
       "description": "Wallet appbar 'Receive' button"
+    },
+    "markasused": "Mark as used",
+    "@markasused": {
+      "description": "button for vouchers page view"
+    },
+    "code": "Code",
+    "@code": {
+      "description": "'Code' word for voucher list"
+    },
+    "confirmationtitle": "Confirm to use",
+    "@confirmationtitle": {
+      "description": "Alert dialog title"
+    },
+    "confirmationtext": "Do you want to use the voucher",
+    "@confirmationtext": {
+      "description": "Alert dialog content"
+    },
+    "confirmationyes": "Yes",
+    "@confirmationyes": {
+      "description": "Alert dialog yes"
+    },
+    "confirmationno": "Cancel",
+    "@confirmationno": {
+      "description": "Alert dialog no"
     }
 }

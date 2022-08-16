@@ -19,10 +19,8 @@ class _VoucherItemState extends State<VoucherItem> {
           context,
           MaterialPageRoute(
             builder: (context) => VoucherItemPage(
-                widget.voucher.name,
-                widget.voucher.description,
-                widget.voucher.code,
-                widget.voucher.image),
+              widget.voucher,
+            ),
           ),
         );
       },
@@ -43,8 +41,8 @@ class _VoucherItemState extends State<VoucherItem> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 20.0, 30, 0),
-                child: Image.asset(
-                  'assets/images/voucherPlaceholder.png',
+                child: Image.network(
+                  widget.voucher.image,
                   height: 150,
                   width: double.infinity,
                   fit: BoxFit.cover,
