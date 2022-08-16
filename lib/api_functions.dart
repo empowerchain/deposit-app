@@ -9,17 +9,42 @@ Future<List<dynamic>> getVouchersForUser(
   final body = jsonEncode({"UserPubKey": userPubKey});
 
   final response = await http.post(
-    Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.GetVouchersForUser'),
+    Uri.parse(
+        'https://staging-deposit-pqu2.encr.app/deposit.GetVouchersForUser'),
     headers: {"Authorization": currentToken},
     body: body,
   );
-
-  Map<String,dynamic> vouchers = jsonDecode(response.body);
+  Map<String, dynamic> vouchers = jsonDecode(response.body);
   if (response.statusCode == 200) {
     List<dynamic> content = vouchers["vouchers"];
-    return vouchers["vouchers"];
+    List<dynamic> available = [];
+    for (var item in content) {
+      var usable = item["voucher"]["invalidated"];
+      if (!usable) {
+        available.add(item);
+      }
+    }
+
+    return available;
   } else {
     return [];
+  }
+}
+
+Future<bool> invalidateVoucher(String? voucherID, String? token) async {
+  String currentToken = "Bearer $token";
+  final body = jsonEncode({"voucherID": voucherID});
+
+  final response = await http.post(
+    Uri.parse(
+        'https://staging-deposit-pqu2.encr.app/deposit.InvalidateVoucher'),
+    headers: {"Authorization": currentToken},
+    body: body,
+  );
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    return false;
   }
 }
 
