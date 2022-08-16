@@ -52,7 +52,6 @@ class _DepositState extends State<Deposit> {
     setState(
       () {
         _scanBarcode = barcodeScanRes;
-        print(_scanBarcode);
         Navigator.push(
           context,
           MaterialPageRoute(

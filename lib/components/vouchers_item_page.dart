@@ -21,10 +21,8 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
   @override
   void initState() {
     getPreferences().then((value) {
-      print(value["pubKey"]);
       token = value["token"] as String;
       activated = widget.voucher.used;
-      print(token);
     });
   }
 

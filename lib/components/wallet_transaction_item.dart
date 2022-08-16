@@ -17,7 +17,6 @@ class _TransactionItemState extends State<TransactionItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          print(200);
         },
         child: Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 0, 30.0, 0),
