@@ -1,20 +1,33 @@
+import 'package:depositapp/api_functions.dart';
+import 'package:depositapp/classes/voucher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VoucherItemPage extends StatefulWidget {
-  final String name;
-  final String description;
-  final String code;
-  final String imageUrl;
-  const VoucherItemPage(this.name, this.description, this.code, this.imageUrl,
-      {Key? key})
-      : super(key: key);
+  final Voucher voucher;
+  const VoucherItemPage(
+    this.voucher, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<VoucherItemPage> createState() => _VoucherItemPageState();
 }
 
 class _VoucherItemPageState extends State<VoucherItemPage> {
+  bool activated = false;
+  String token = '';
+
+  @override
+  void initState() {
+    getPreferences().then((value) {
+      print(value["pubKey"]);
+      token = value["token"] as String;
+      activated = widget.voucher.used;
+      print(token);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +53,7 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                 height: 40.0,
               ),
               Text(
-                widget.description,
+                widget.voucher.description,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
@@ -50,7 +63,7 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                 height: 4.0,
               ),
               Text(
-                widget.name,
+                widget.voucher.name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
@@ -58,8 +71,8 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 20.0, 30, 0),
-                child: Image.asset(
-                  'assets/images/voucherPlaceholder.png',
+                child: Image.network(
+                  widget.voucher.image,
                   height: 150,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -69,7 +82,7 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                 height: 4.0,
               ),
               Text(
-                "Code: ${widget.code}",
+                "${AppLocalizations.of(context)!.code}: ${widget.voucher.code}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
@@ -85,14 +98,30 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                       borderRadius: BorderRadius.circular(0),
                     ),
                   ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromRGBO(104, 223, 87, 1)),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(300, 40)),
+                  backgroundColor: !activated
+                      ? MaterialStateProperty.all<Color>(
+                          const Color.fromRGBO(104, 223, 87, 1))
+                      : MaterialStateProperty.all<Color>(
+                          const Color.fromRGBO(100, 100, 100, 1)),
+                  minimumSize:
+                      MaterialStateProperty.all<Size>(const Size(300, 40)),
                 ),
-                onPressed: () {},
-                child: const Text(
-                  'Mark as used',
-                  style: TextStyle(
+                onPressed: !activated
+                    ? () async {
+                        print("200");
+                        print(widget.voucher.code);
+                        await invalidateVoucher(widget.voucher.code, token)
+                            .then(
+                          (value) => setState(() {
+                            activated = true;
+                          }),
+                        );
+                        print(activated);
+                      }
+                    : null,
+                child: Text(
+                  AppLocalizations.of(context)!.markasused,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16.0,
                   ),
