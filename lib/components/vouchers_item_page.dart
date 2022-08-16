@@ -133,10 +133,11 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                                     setState(() {
                                       activated = true;
                                     });
-                                    Navigator.pop(
-                                        context,
-                                        AppLocalizations.of(context)!
-                                            .confirmationyes);
+                                    Future.delayed(Duration(seconds: 1));
+                                    Navigator.of(context)
+                                      ..pop()
+                                      ..pop()
+                                      ..pop();
                                   });
                                 },
                                 child: Text(AppLocalizations.of(context)!
