@@ -3,6 +3,7 @@ import 'package:elliptic/elliptic.dart';
 import 'package:ecdsa/ecdsa.dart';
 import 'package:crypto/crypto.dart';
 
+
 String createToken(String privKey) {
   var ec = getS256();
   var privateKey =
