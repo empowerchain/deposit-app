@@ -55,6 +55,10 @@
     "@voucher": {
       "description": "Title for voucher view"
     },
+    "myvouchersused": "Used vouchers",
+    "@myvouchersused": {
+      "description": "Title for used vouchers"
+    },
     "receive": "Receive",
     "@receive": {
       "description": "Wallet appbar 'Receive' button"

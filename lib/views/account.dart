@@ -24,6 +24,15 @@ class _AccountState extends State<Account> {
           style: const TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.settings,
+              color: Color.fromRGBO(103, 224, 86, 1),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [

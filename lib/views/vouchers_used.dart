@@ -1,25 +1,24 @@
 import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/voucher.dart';
 import 'package:depositapp/components/vouchers_display.dart';
-import 'package:depositapp/views/vouchers_used.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class Vouchers extends StatefulWidget {
+class TrashCan extends StatefulWidget {
   final String? token;
   final String? userPubKey;
 
-  const Vouchers(
+  const TrashCan(
     this.token,
     this.userPubKey, {
     super.key,
   });
 
   @override
-  State<Vouchers> createState() => _VouchersState();
+  State<TrashCan> createState() => _TrashCanState();
 }
 
-class _VouchersState extends State<Vouchers> {
+class _TrashCanState extends State<TrashCan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,26 +28,12 @@ class _VouchersState extends State<Vouchers> {
         ),
         centerTitle: true,
         title: Text(
-          AppLocalizations.of(context)!.myvouchers,
+          AppLocalizations.of(context)!.myvouchersused,
           style: const TextStyle(
             color: Color.fromRGBO(104, 223, 87, 100),
           ),
         ),
         backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => TrashCan(widget.token, widget.userPubKey),
-              ),
-            ),
-            icon: const Icon(
-              Icons.delete,
-              color: Color.fromRGBO(103, 224, 86, 1),
-            ),
-          ),
-        ],
       ),
       body: FutureBuilder(
         initialData: null,
@@ -71,11 +56,9 @@ class _VouchersState extends State<Vouchers> {
 
   Future<List<Widget>> _getVouchers() async {
     final vouchersAvailable =
-        await getVouchersForUser(widget.userPubKey, widget.token);
-    print(widget.token);
-    print(widget.userPubKey);
-    print(vouchersAvailable);
-    return vouchersAvailable.map(
+        await getUsedVouchersForUser(widget.userPubKey, widget.token);
+    final vouchersNotUsed = vouchersAvailable;
+    return vouchersNotUsed.map(
       (item) {
         Map voucherData = item["voucher"];
         Map voucherDefinition = item["voucherDefinition"];
