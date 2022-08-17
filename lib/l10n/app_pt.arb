@@ -52,8 +52,12 @@
       "description": "Wallet appbar 'Voucher' button"
     },
     "myvouchers": "Meus Vouchers",
-    "@voucher": {
+    "@myvouchers": {
       "description": "Title for voucher view"
+    },
+    "myvouchersused": "Vouchers usados",
+    "@myvouchersused": {
+      "description": "Title for used vouchers"
     },
     "receive": "Receber",
     "@receive": {
