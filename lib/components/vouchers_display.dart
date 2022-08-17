@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:depositapp/classes/voucher.dart';
 import 'package:depositapp/components/vouchers_item_page.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +48,16 @@ class _VoucherItemState extends State<VoucherItem> {
                   height: 150,
                   width: double.infinity,
                   fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.amber,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Whoops!',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    );
+                  },
                 ),
               ),
               Padding(
