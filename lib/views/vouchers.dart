@@ -1,6 +1,7 @@
 import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/voucher.dart';
 import 'package:depositapp/components/vouchers_display.dart';
+import 'package:depositapp/views/vouchers_used.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -34,6 +35,20 @@ class _VouchersState extends State<Vouchers> {
           ),
         ),
         backgroundColor: const Color.fromRGBO(245, 245, 245, 1),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TrashCan(widget.token, widget.userPubKey),
+              ),
+            ),
+            icon: const Icon(
+              Icons.delete,
+              color: Color.fromRGBO(103, 224, 86, 1),
+            ),
+          ),
+        ],
       ),
       body: FutureBuilder(
         initialData: null,
@@ -57,6 +72,9 @@ class _VouchersState extends State<Vouchers> {
   Future<List<Widget>> _getVouchers() async {
     final vouchersAvailable =
         await getVouchersForUser(widget.userPubKey, widget.token);
+    print(widget.token);
+    print(widget.userPubKey);
+    print(vouchersAvailable);
     return vouchersAvailable.map(
       (item) {
         Map voucherData = item["voucher"];
