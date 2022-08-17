@@ -51,7 +51,7 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                 height: 40.0,
               ),
               Text(
-                widget.voucher.description,
+                widget.voucher.name,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
@@ -60,13 +60,13 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
               const SizedBox(
                 height: 4.0,
               ),
-              Text(
-                widget.voucher.name,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                ),
-              ),
+              // Text(
+              //   widget.voucher.description,
+              //   style: const TextStyle(
+              //     fontWeight: FontWeight.bold,
+              //     fontSize: 16.0,
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 20.0, 30, 0),
                 child: Image.network(

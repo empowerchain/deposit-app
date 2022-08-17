@@ -81,8 +81,8 @@ class _VouchersState extends State<Vouchers> {
         Map voucherDefinition = item["voucherDefinition"];
         Voucher voucher = Voucher(
           voucherData["id"],
-          voucherData["voucherDefinitionID"],
           voucherDefinition["name"],
+          voucherData["voucherDefinitionID"],
           voucherDefinition["pictureURL"],
           voucherData["invalidated"],
         );

@@ -64,8 +64,8 @@ class _TrashCanState extends State<TrashCan> {
         Map voucherDefinition = item["voucherDefinition"];
         Voucher voucher = Voucher(
           voucherData["id"],
-          voucherData["voucherDefinitionID"],
           voucherDefinition["name"],
+          voucherData["voucherDefinitionID"],
           voucherDefinition["pictureURL"],
           voucherData["invalidated"],
         );

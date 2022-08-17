@@ -72,14 +72,14 @@ class _VoucherItemState extends State<VoucherItem> {
                             height: 5.0,
                           ),
                           Text(
-                            widget.voucher.description,
+                            widget.voucher.name,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
                             ),
                           ),
                           Text(
-                            widget.voucher.name,
+                            widget.voucher.description,
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
