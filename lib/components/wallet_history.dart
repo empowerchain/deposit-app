@@ -50,11 +50,9 @@ class _WalletHistoryState extends State<WalletHistory> {
 
     return history.map(
       (item) {
-        print("200 + ${item['eventType']}");
         String action = item['eventType'];
         String nameAction = action[0].toUpperCase() + action.substring(1).toLowerCase();
         List<String> numberOfRewardsString = item['numberOfUnitsIn'].toString().split('.');
-        print(numberOfRewardsString);
         String finalNumber = numberOfRewardsString[0];
         if (numberOfRewardsString.length > 1){
           String decimals = numberOfRewardsString[1];
