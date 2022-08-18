@@ -59,6 +59,26 @@ Future<List<dynamic>> getUsedVouchersForUser(
   }
 }
 
+Future<List<dynamic>> getHistory(String? userPubKey, String? token) async {
+  String currentToken = "Bearer $token";
+  final body = jsonEncode({"UserPubKey": userPubKey});
+
+  final response = await http.post(
+    Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.GetHistory'),
+    headers: {"Authorization": currentToken},
+    body: body,
+  );
+  print(body);
+  Map<String, dynamic> responseBody = jsonDecode(response.body);
+  if (response.statusCode == 200) {
+    List<dynamic> history = responseBody["events"];
+    print(history);
+    return history;
+  } else {
+    return [];
+  }
+}
+
 Future<bool> invalidateVoucher(String? voucherID, String? token) async {
   String currentToken = "Bearer $token";
   final body = jsonEncode({"voucherID": voucherID});
