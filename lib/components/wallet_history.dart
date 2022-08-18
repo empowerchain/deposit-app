@@ -1,7 +1,6 @@
 import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/transaction.dart';
 import 'package:depositapp/components/wallet_transaction_item.dart';
-import 'package:depositapp/dumb_data.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,13 +34,6 @@ class _WalletHistoryState extends State<WalletHistory> {
             );
           },
         ),
-
-        // ListView(
-        //   shrinkWrap: true,
-        //   children: data.map<Widget>((order) {
-        //     return (TransactionItem(order));
-        //   }).toList(),
-        // ),
       ),
     );
   }
