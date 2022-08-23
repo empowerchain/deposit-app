@@ -65,7 +65,7 @@ class _WalletHistoryState extends State<WalletHistory> {
         }
         String answer = "+${finalNumber} ${item['unitNameIn']}";
         String time = item['eventTime'].split('T')[0];
-        Transaction currentTx = Transaction(nameAction, nameAction, time, answer);
+        Transaction currentTx = Transaction(nameAction, '', time, answer);
         return TransactionItem(currentTx);
       },
     ).toList();
