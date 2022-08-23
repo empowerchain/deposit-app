@@ -39,6 +39,22 @@
     "@myaccount": {
       "description": "'My account' button in Account widget"
     },
+    "firstname": "Nome",
+    "@firstname": {
+      "description": "Name for My Account view"
+    },
+    "lastname": "Apelido",
+    "@lastname": {
+      "description": "Last Name for My Account view"
+    },
+    "edit": "Edita",
+    "@edit": {
+      "description": "Edit text button for My Account view"
+    },
+    "save": "Salve",
+    "@save": {
+      "description": "Save text button for My Account view"
+    },
     "mywallet": "Minha carteira",
     "@mywallet": {
       "description": "Upper bar Widget for wallet tab"
