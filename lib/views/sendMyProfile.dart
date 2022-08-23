@@ -1,16 +1,25 @@
-import 'package:depositapp/views/sendMyProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyProfile extends StatefulWidget {
-  const MyProfile({super.key});
+class SendMyProfile extends StatefulWidget {
+  final String firstName;
+  final String lastName;
+  final String email;
+
+  const SendMyProfile(
+    this.firstName,
+    this.lastName,
+    this.email, {
+    super.key,
+  });
 
   @override
-  State<MyProfile> createState() => _MyProfileState();
+  State<SendMyProfile> createState() => _SendMyProfileState();
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _SendMyProfileState extends State<SendMyProfile> {
+  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   Map<String, bool> _isEnable = {
     "First Name": false,
     "Last Name": false,
@@ -64,14 +73,11 @@ class _MyProfileState extends State<MyProfile> {
                       color: Color.fromRGBO(96, 200, 248, 1),
                     ),
                   ),
-            onPressed: () {
-              setState(
-                () {
-                  _isEnable[value] = !_isEnable[value]!;
-                },
-              );
-              
-            },
+            onPressed: () => setState(
+              () {
+                _isEnable[value] = !_isEnable[value]!;
+              },
+            ),
           ),
         ],
       ),
@@ -87,26 +93,10 @@ class _MyProfileState extends State<MyProfile> {
         ),
         centerTitle: true,
         title: Text(
-          AppLocalizations.of(context)!.myprofile,
+          AppLocalizations.of(context)!.sharemyprofile,
           style: const TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SendMyProfile(),
-                ),
-              );
-            },
-            icon: const Icon(
-              Icons.send_to_mobile,
-              color: Color.fromRGBO(103, 224, 86, 1),
-            ),
-          ),
-        ],
       ),
       body: Column(
         children: [

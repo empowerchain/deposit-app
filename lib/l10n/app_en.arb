@@ -43,6 +43,10 @@
     "@myprofile": {
       "description": "'My Profile' button in Profile widget"
     },
+    "sharemyprofile": "Share",
+    "@sharemyprofile": {
+      "description": "'Share' title in Share my Profile widget"
+    },
     "firstname": "First Name",
     "@firstname": {
       "description": "Name for My Account view"
