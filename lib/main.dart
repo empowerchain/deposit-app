@@ -9,6 +9,8 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Locale language = const Locale('en');
+
     return MaterialApp(
       title: 'Deposit App',
       home: Scaffold(body: Web3Register()),
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => Web3Register(),
         '/homepage': (context) => const HomePage(),
       },
-      locale: const Locale('pt'),
+      locale: language,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
