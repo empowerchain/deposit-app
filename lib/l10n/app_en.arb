@@ -35,6 +35,10 @@
     "@help": {
       "description": "Help button in Account widget"
     },
+    "myaccount": "My Account",
+    "@myaccount": {
+      "description": "'My Account' button in Account widget"
+    },
     "mywallet": "My wallet",
     "@mywallet": {
       "description": "Upper bar Widget for wallet tab"
@@ -86,5 +90,9 @@
     "confirmationno": "Cancel",
     "@confirmationno": {
       "description": "Alert dialog no"
+    },
+    "settingstitle": "Settings",
+    "@settingstitle": {
+      "description": "Settings title"
     }
 }
