@@ -39,6 +39,10 @@
     "@myaccount": {
       "description": "'My Account' button in Account widget"
     },
+    "myprofile": "My Profile",
+    "@myprofile": {
+      "description": "'My Profile' button in Profile widget"
+    },
     "firstname": "First Name",
     "@firstname": {
       "description": "Name for My Account view"
@@ -46,6 +50,10 @@
     "lastname": "Last Name",
     "@lastname": {
       "description": "Last Name for My Account view"
+    },
+    "organization": "Organization",
+    "@organization": {
+      "description": "Organization for Share Profile view"
     },
     "edit": "Edit",
     "@edit": {
