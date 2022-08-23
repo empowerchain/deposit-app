@@ -35,6 +35,38 @@
     "@help": {
       "description": "Help button in Account widget"
     },
+    "myaccount": "Minha Conta",
+    "@myaccount": {
+      "description": "'My account' button in Account widget"
+    },
+    "myprofile": "Meu Perfil",
+    "@myprofile": {
+      "description": "'My Profile' button in Profile widget"
+    },
+    "sharemyprofile": "Distribuir",
+    "@sharemyprofile": {
+      "description": "'Share' title in Share my Profile widget"
+    },
+    "firstname": "Nome",
+    "@firstname": {
+      "description": "Name for My Account view"
+    },
+    "lastname": "Apelido",
+    "@lastname": {
+      "description": "Last Name for My Account view"
+    },
+    "organization": "Organização",
+    "@organization": {
+      "description": "Organization for Share Profile view"
+    },
+    "edit": "Edita",
+    "@edit": {
+      "description": "Edit text button for My Account view"
+    },
+    "save": "Salve",
+    "@save": {
+      "description": "Save text button for My Account view"
+    },
     "mywallet": "Minha carteira",
     "@mywallet": {
       "description": "Upper bar Widget for wallet tab"
@@ -85,6 +117,10 @@
     },
     "confirmationno": "Cancel",
     "@confirmationno": {
+      "description": "Alert dialog no"
+    },
+    "settingstitle": "Configurações",
+    "@settingstitle": {
       "description": "Alert dialog no"
     }
 }

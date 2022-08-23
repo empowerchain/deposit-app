@@ -1,4 +1,6 @@
 import 'package:depositapp/login.dart';
+import 'package:depositapp/views/myProfile.dart';
+import 'package:depositapp/views/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,10 +16,56 @@ class _AccountState extends State<Account> {
   final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   var originalAddress = "cosmos19r3jlewte0mfazu9p2u5nn9j63c8mtw0h7h2rg";
 
+  Widget option(BuildContext context, final String icon, String textDisplay,
+      String path) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyProfile(),
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const SizedBox(width: 25.0),
+              SizedBox(
+                  height: 50.0,
+                  child: ImageIcon(
+                    AssetImage(icon),
+                    color: const Color.fromRGBO(103, 224, 86, 1),
+                    size: 30.0,
+                  )),
+              const SizedBox(width: 20.0),
+              Text(
+                textDisplay,
+              ),
+              const Expanded(
+                child: SizedBox(
+                  width: 1.0,
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios),
+              const SizedBox(width: 25.0),
+            ],
+          ),
+          const Divider(
+            height: 10,
+            thickness: 1,
+            endIndent: 0,
+            color: Color.fromARGB(255, 211, 211, 211),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.account,
@@ -26,7 +74,14 @@ class _AccountState extends State<Account> {
         backgroundColor: Colors.white,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Settings(),
+                ),
+              );
+            },
             icon: const Icon(
               Icons.settings,
               color: Color.fromRGBO(103, 224, 86, 1),
@@ -67,33 +122,17 @@ class _AccountState extends State<Account> {
             endIndent: 0,
             color: Color.fromARGB(255, 211, 211, 211),
           ),
-          Row(
-            children: [
-              const SizedBox(width: 25.0),
-              const SizedBox(
-                height: 50.0,
-                child: ImageIcon(
-                  AssetImage("assets/images/questionIcon.png"),
-                  color: Color.fromRGBO(103, 224, 86, 1),
-                  size: 30.0,
-                ),
-              ),
-              const SizedBox(width: 20.0),
-              Text(
-                AppLocalizations.of(context)!.help,
-              ),
-              const Expanded(
-                child: Text("   "),
-              ),
-              Icon(Icons.arrow_forward_ios),
-              const SizedBox(width: 25.0),
-            ],
+          option(
+            context,
+            "assets/images/account_circle.png",
+            AppLocalizations.of(context)!.myaccount,
+            'path',
           ),
-          const Divider(
-            height: 10,
-            thickness: 1,
-            endIndent: 0,
-            color: Color.fromARGB(255, 211, 211, 211),
+          option(
+            context,
+            "assets/images/questionIcon.png",
+            AppLocalizations.of(context)!.help,
+            'path',
           ),
           const SizedBox(height: 10.0),
           Row(
