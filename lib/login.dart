@@ -184,9 +184,13 @@ class _Web3Register extends State<Web3Register> {
         var ec = getS256();
         var privHex = PrivateKey.fromHex(ec, privKey);
         var pubKey = privHex.publicKey.toCompressedHex();
+        var email = response.userInfo.email.toString();
+        var name = response.userInfo.name.toString();
         String authToken = createToken(privKey);
         await prefs.setString('token', authToken);
         await prefs.setString('public-key', pubKey);
+        await prefs.setString('email', email);
+        await prefs.setString('name', name);
         setState(() {
           _result = prefs.getString('token');
           _mail = response.userInfo.email.toString();
