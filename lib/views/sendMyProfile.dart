@@ -19,7 +19,6 @@ class SendMyProfile extends StatefulWidget {
 }
 
 class _SendMyProfileState extends State<SendMyProfile> {
-  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   Map<String, bool> _isEnable = {
     "First Name": false,
     "Last Name": false,
@@ -94,7 +93,10 @@ class _SendMyProfileState extends State<SendMyProfile> {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.sharemyprofile,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: Colors.white,
       ),

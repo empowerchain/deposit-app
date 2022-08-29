@@ -64,7 +64,10 @@ class _AccountState extends State<Account> {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.account,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: Colors.white,
         actions: [
