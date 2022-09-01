@@ -5,6 +5,9 @@ import 'dart:async';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:elliptic/elliptic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web3auth_flutter/enums.dart';
+import 'package:web3auth_flutter/input.dart';
+import 'package:web3auth_flutter/output.dart';
 import 'package:web3auth_flutter/web3auth_flutter.dart';
 
 class Web3Register extends StatefulWidget {
@@ -29,14 +32,14 @@ class _Web3Register extends State<Web3Register> {
     HashMap themeMap = HashMap<String, String>();
     themeMap['primary'] = "#fff000";
 
-    await Web3AuthFlutter.init(
+    await Web3AuthFlutter.init(Web3AuthOptions(
       clientId:
           'BCTraDCiou6NAUmfMhvL8zS0RTfV07Tvj4iuRwhYHneJyQWakx8i6rZ12p_n021XzCcjcSdcHBY2qU-WD3MPpfA',
       network: Network.mainnet,
-      redirectUri: 'io.empowerchain.depositapp://auth',
-      whiteLabelData: WhiteLabelData(
+      redirectUrl: Uri.parse("io.empowerchain.depositapp://auth"),
+      whiteLabel: WhiteLabelData(
           dark: true, name: "flutterdepositapp", theme: themeMap),
-    );
+    ));
   }
 
   Widget buttonLogo(String assetImage, void Function() networkFunction) {
@@ -181,15 +184,19 @@ class _Web3Register extends State<Web3Register> {
         final prefs = await SharedPreferences.getInstance();
         var privKey = response.privKey;
         var ec = getS256();
-        var privHex = PrivateKey.fromHex(ec, privKey);
+        var privHex = PrivateKey.fromHex(ec, privKey!);
         var pubKey = privHex.publicKey.toCompressedHex();
+        var email = response.userInfo!.email.toString();
+        var name = response.userInfo!.name.toString();
         String authToken = createToken(privKey);
         await prefs.setString('token', authToken);
         await prefs.setString('public-key', pubKey);
+        await prefs.setString('email', email);
+        await prefs.setString('name', name);
         setState(() {
           _result = prefs.getString('token');
-          _mail = response.userInfo.email.toString();
-          _name = response.userInfo.name.toString();
+          _mail = response.userInfo!.email.toString();
+          _name = response.userInfo!.name.toString();
         });
         await Navigator.pushNamed(context, "/homepage");
       } on UserCancelledException {
@@ -201,25 +208,25 @@ class _Web3Register extends State<Web3Register> {
   }
 
   Future<Web3AuthResponse> _withGoogle() {
-    return Web3AuthFlutter.login(
-        provider: Provider.google, mfaLevel: MFALevel.MANDATORY);
+    return Web3AuthFlutter.login(LoginParams(
+        loginProvider: Provider.google, mfaLevel: MFALevel.MANDATORY));
   }
 
   Future<Web3AuthResponse> _withFacebook() {
-    return Web3AuthFlutter.login(
-        provider: Provider.facebook, mfaLevel: MFALevel.MANDATORY);
+    return Web3AuthFlutter.login(LoginParams(
+        loginProvider: Provider.facebook, mfaLevel: MFALevel.MANDATORY));
   }
 
   Future<Web3AuthResponse> _withTwitter() {
-    return Web3AuthFlutter.login(
-        provider: Provider.twitter, mfaLevel: MFALevel.MANDATORY);
+    return Web3AuthFlutter.login(LoginParams(
+        loginProvider: Provider.twitter, mfaLevel: MFALevel.MANDATORY));
   }
 
   Future<Web3AuthResponse> _withMail() {
-    return Web3AuthFlutter.login(
-      provider: Provider.email_passwordless,
+    return Web3AuthFlutter.login(LoginParams(
+      loginProvider: Provider.email_passwordless,
       mfaLevel: MFALevel.MANDATORY,
       extraLoginOptions: ExtraLoginOptions(login_hint: _mail),
-    );
+    ));
   }
 }

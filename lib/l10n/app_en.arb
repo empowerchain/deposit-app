@@ -122,5 +122,9 @@
     "settingstitle": "Settings",
     "@settingstitle": {
       "description": "Settings title"
+    },
+    "wrongmail": "Please add a valid mail",
+    "@wrongmail": {
+      "description": "Message of wrong mail"
     }
 }

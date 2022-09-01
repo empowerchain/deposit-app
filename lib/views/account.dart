@@ -19,12 +19,7 @@ class _AccountState extends State<Account> {
   Widget option(BuildContext context, final String icon, String textDisplay,
       String path) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyProfile(),
-        ),
-      ),
+      onTap: () => Navigator.pushNamed(context, path),
       child: Column(
         children: [
           Row(
@@ -69,7 +64,10 @@ class _AccountState extends State<Account> {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.account,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: Colors.white,
         actions: [
@@ -125,14 +123,14 @@ class _AccountState extends State<Account> {
           option(
             context,
             "assets/images/account_circle.png",
-            AppLocalizations.of(context)!.myaccount,
-            'path',
+            AppLocalizations.of(context)!.myprofile,
+            '/myProfile',
           ),
           option(
             context,
             "assets/images/questionIcon.png",
             AppLocalizations.of(context)!.help,
-            'path',
+            '/homepage',
           ),
           const SizedBox(height: 10.0),
           Row(

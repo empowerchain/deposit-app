@@ -1,6 +1,5 @@
 import 'package:depositapp/login.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:depositapp/views/myProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,6 +33,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/login': (context) => Web3Register(),
         '/homepage': (context) => const HomePage(),
+        '/myProfile': (context) => const MyProfile(),
       },
       locale: language,
       localizationsDelegates: const [

@@ -122,5 +122,9 @@
     "settingstitle": "Configurações",
     "@settingstitle": {
       "description": "Alert dialog no"
+    },
+    "wrongmail": "Por favor escreva un correo válido",
+    "@wrongmail": {
+      "description": "Message of wrong mail"
     }
 }
