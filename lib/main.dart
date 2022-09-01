@@ -1,4 +1,6 @@
 import 'package:depositapp/login.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:depositapp/views/myProfile.dart';
 import 'package:depositapp/views/underDevelopment.dart';
 import 'package:flutter/material.dart';
