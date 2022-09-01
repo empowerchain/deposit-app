@@ -1,5 +1,6 @@
 import 'package:depositapp/login.dart';
 import 'package:depositapp/views/myProfile.dart';
+import 'package:depositapp/views/underDevelopment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => Web3Register(),
         '/homepage': (context) => const HomePage(),
         '/myProfile': (context) => const MyProfile(),
+        '/underDevelopment': (context) => const UnderDevelopment(),
       },
       locale: language,
       localizationsDelegates: const [

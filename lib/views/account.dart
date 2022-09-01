@@ -1,6 +1,7 @@
 import 'package:depositapp/login.dart';
 import 'package:depositapp/views/myProfile.dart';
 import 'package:depositapp/views/settings.dart';
+import 'package:depositapp/views/underDevelopment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +19,7 @@ class _AccountState extends State<Account> {
 
   Widget option(BuildContext context, final String icon, String textDisplay,
       String path) {
-    return GestureDetector(
+    return InkWell(
       onTap: () => Navigator.pushNamed(context, path),
       child: Column(
         children: [
@@ -76,7 +77,7 @@ class _AccountState extends State<Account> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Settings(),
+                  builder: (context) => UnderDevelopment(),
                 ),
               );
             },
@@ -130,7 +131,7 @@ class _AccountState extends State<Account> {
             context,
             "assets/images/questionIcon.png",
             AppLocalizations.of(context)!.help,
-            '/homepage',
+            '/underDevelopment',
           ),
           const SizedBox(height: 10.0),
           Row(
