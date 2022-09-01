@@ -151,7 +151,6 @@ class _Web3Register extends State<Web3Register> {
             height: 50.0, // <-
             child: SizedBox.expand(
               child: ElevatedButton(
-                // onPressed: (() => debugPrint("QrCode")),
                 onPressed: _login(_withMail),
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(

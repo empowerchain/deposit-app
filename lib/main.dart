@@ -2,11 +2,24 @@ import 'package:depositapp/login.dart';
 import 'package:depositapp/views/myProfile.dart';
 import 'package:depositapp/views/underDevelopment.dart';
 import 'package:flutter/material.dart';
-import 'views/home_page.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() => runApp(MyApp());
+import 'firebase_options.dart';
+import 'views/home_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Pass all uncaught errors from the framework to Crashlytics.
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
