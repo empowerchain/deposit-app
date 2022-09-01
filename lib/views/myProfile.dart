@@ -11,13 +11,32 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
+  String name = '';
+  String email = '';
+  bool notMail = false;
+
+  Map<String, TextEditingController> controllers = {
+    "First Name": TextEditingController(),
+    "Last Name": TextEditingController(),
+    "Email": TextEditingController()
+  };
+
   Map<String, bool> _isEnable = {
     "First Name": false,
     "Last Name": false,
     "Email": false,
   };
 
-  Widget characteristic(String value) {
+  void initState() {
+    SharedPreferences.getInstance().then((value) {
+      setState(() {
+        name = value.getString("name") as String;
+        email = value.getString("email") as String;
+      });
+    });
+  }
+
+  Widget characteristic(String value, String data) {
     return Container(
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -33,10 +52,27 @@ class _MyProfileState extends State<MyProfile> {
               Container(
                 width: 150.0,
                 child: TextField(
+                  controller: controllers[data],
+                  onChanged: value == "Email"
+                      ? (String input) {
+                          bool verifyMail = RegExp(
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(input);
+                          if (!verifyMail) {
+                            setState(() {
+                              notMail = true;
+                            });
+                          } else {
+                            setState(() {
+                              notMail = false;
+                            });
+                          }
+                        }
+                      : null,
                   textAlign: TextAlign.right,
                   decoration: InputDecoration(
-                    hintText: "Festive Leave",
-                    hintStyle: TextStyle(
+                    hintText: data,
+                    hintStyle: const TextStyle(
                       color: Colors.grey,
                     ),
                   ),
@@ -70,7 +106,6 @@ class _MyProfileState extends State<MyProfile> {
                   _isEnable[value] = !_isEnable[value]!;
                 },
               );
-              
             },
           ),
         ],
@@ -88,16 +123,23 @@ class _MyProfileState extends State<MyProfile> {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.myprofile,
-          style: const TextStyle(color: Colors.black),
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         backgroundColor: Colors.white,
         actions: [
           IconButton(
             onPressed: () {
+              String firstName = controllers["First Name"]!.text == "" ? name : controllers["First Name"]!.text;
+              String lastName = controllers["Last Name"]!.text;
+              String mail = controllers["Email"]!.text == "" ? email : controllers["Email"]!.text;
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SendMyProfile("firstName", "lastName", "mail"),
+                  builder: (context) =>
+                      SendMyProfile(firstName, lastName, mail),
                 ),
               );
             },
@@ -117,9 +159,10 @@ class _MyProfileState extends State<MyProfile> {
             crossAxisAlignment:
                 CrossAxisAlignment.center, //Center Row contents vertically,
             children: [
-              characteristic(AppLocalizations.of(context)!.firstname),
-              characteristic(AppLocalizations.of(context)!.lastname),
-              characteristic("Email"),
+              characteristic(AppLocalizations.of(context)!.firstname, name),
+              characteristic(AppLocalizations.of(context)!.lastname, ""),
+              characteristic("Email", email),
+              notMail ? Text("sup") : SizedBox(),
             ],
           ),
         ],
