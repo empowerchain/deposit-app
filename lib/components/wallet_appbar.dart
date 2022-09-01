@@ -1,4 +1,5 @@
 import 'package:depositapp/api_functions.dart';
+import 'package:depositapp/views/underDevelopment.dart';
 import 'package:depositapp/views/vouchers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -70,13 +71,13 @@ class _WalletAppBarState extends State<WalletAppBar> {
           context,
           "assets/images/scanIcon.png",
           AppLocalizations.of(context)!.send,
-          const Text("None"),
+          UnderDevelopment(),
         ),
         buttonWidget(
           context,
           "assets/images/qrIcon.png",
           AppLocalizations.of(context)!.receive,
-          const Text("None"),
+          UnderDevelopment(),
         ),
         buttonVouchers(
           context,
