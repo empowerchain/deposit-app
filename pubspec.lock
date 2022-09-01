@@ -582,12 +582,10 @@ packages:
   web3auth_flutter:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: c30c065296d422b5f3866993181677692e03f00b
-      url: "https://github.com/bjaanes/web3auth-flutter-sdk.git"
-    source: git
-    version: "0.0.2"
+      name: web3auth_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   web_socket_channel:
     dependency: transitive
     description:
