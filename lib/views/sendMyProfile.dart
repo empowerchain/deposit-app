@@ -1,3 +1,4 @@
+import 'package:depositapp/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,58 +26,53 @@ class _SendMyProfileState extends State<SendMyProfile> {
     "Email": false,
   };
 
-  Widget characteristic(String value) {
+  Widget characteristic(String parameter) {
+    Map<String, String> _values = {
+      "First Name": widget.firstName,
+      "Last Name": widget.lastName,
+      "Email": widget.email,
+    };
+
+    String inputByUser = _values[parameter]!;
+
     return Container(
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
           SizedBox(width: 20.0),
-          Expanded(child: Text(value)),
+          Expanded(child: Text(parameter)),
           SizedBox(
             width: 20.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
+              Text(inputByUser),
               Container(
-                width: 150.0,
-                child: TextField(
-                  textAlign: TextAlign.right,
-                  decoration: InputDecoration(
-                    hintText: "Festive Leave",
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  enabled: _isEnable[value],
+                width: 50.0,
+                child: Checkbox(
+                  activeColor: Colors.transparent,
+                  fillColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                    if (inputByUser == "") {
+                      return Colors.black38.withOpacity(.32);
+                    }
+                    return Color.fromRGBO(104, 223, 87, 1);
+                  }),
+                  checkColor: Colors.white,
+                  value: inputByUser != "" ? _isEnable[parameter] : false,
+                  onChanged: ((value) {
+                    print(parameter);
+                    setState(() {
+                      _isEnable[parameter] = !_isEnable[parameter]!;
+                    });
+                  }),
                 ),
               ),
             ],
           ),
           SizedBox(
             width: 15,
-          ),
-          TextButton(
-            child: _isEnable[value]!
-                ? Text(
-                    AppLocalizations.of(context)!.save,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(96, 200, 248, 1),
-                    ),
-                  )
-                : Text(
-                    AppLocalizations.of(context)!.edit,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(96, 200, 248, 1),
-                    ),
-                  ),
-            onPressed: () => setState(
-              () {
-                _isEnable[value] = !_isEnable[value]!;
-              },
-            ),
           ),
         ],
       ),
