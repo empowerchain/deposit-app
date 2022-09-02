@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:depositapp/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -24,9 +26,11 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  String deviceLanguage = Platform.localeName.substring(0,2);
+  
   @override
   Widget build(BuildContext context) {
-    Locale language = const Locale('en');
+    Locale language = Locale(deviceLanguage);
 
     return MaterialApp(
       title: 'Deposit App',
