@@ -1,6 +1,7 @@
 import 'package:depositapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsLanguage extends StatefulWidget {
   const SettingsLanguage({super.key});
@@ -10,7 +11,15 @@ class SettingsLanguage extends StatefulWidget {
 }
 
 class _SettingsLanguageState extends State<SettingsLanguage> {
-  Widget languageOption(BuildContext context, String flag,String language, Locale locale) {
+  dynamic prefs;
+
+  @override
+  void initState() async {
+    final prefs = await SharedPreferences.getInstance();
+  }
+
+  Widget languageOption(
+      BuildContext context, String flag, String language, String locale) {
     return Column(children: [
       InkWell(
         child: Padding(
@@ -57,7 +66,10 @@ class _SettingsLanguageState extends State<SettingsLanguage> {
             ]),
           ),
         ),
-        onTap: () => MyApp.setLocale(context, locale),
+        onTap: () {
+          prefs.setString("language", locale); // True = Language setted
+          MyApp.setLocale(context, Locale(locale));
+        },
       ),
       SizedBox(
         height: 20.0,
@@ -88,8 +100,8 @@ class _SettingsLanguageState extends State<SettingsLanguage> {
             SizedBox(
               height: 40.0,
             ),
-            languageOption(context, "🇬🇧", "English", Locale("en")),
-            languageOption(context, "🇵🇹", "Portuguese", Locale("pt")),
+            languageOption(context, "🇬🇧", "English", "en"),
+            languageOption(context, "🇵🇹", "Portuguese", "pt"),
           ]),
         ));
   }
