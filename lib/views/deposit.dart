@@ -34,32 +34,40 @@ class _DepositState extends State<Deposit> {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
       List scanSplit = barcodeScanRes.split('=');
-      if (scanSplit.length > 1){
+      if (scanSplit.length > 1) {
         barcodeScanRes = scanSplit[1];
-      }
-      else{
+        setState(
+          () {
+            _scanBarcode = barcodeScanRes;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VoucherObtained(barcodeScanRes, token),
+              ),
+            );
+          },
+        );
+      } else {
         barcodeScanRes = '';
+        setState(
+          () {
+            _scanBarcode = barcodeScanRes;
+          },
+        );
       }
     } on PlatformException {
       barcodeScanRes = '';
+      setState(
+        () {
+          _scanBarcode = barcodeScanRes;
+        },
+      );
     }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
-    setState(
-      () {
-        _scanBarcode = barcodeScanRes;
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => VoucherObtained(barcodeScanRes, token),
-          ),
-        );
-      },
-    );
   }
 
   @override
