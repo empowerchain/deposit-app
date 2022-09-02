@@ -77,7 +77,7 @@ class _AccountState extends State<Account> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => UnderDevelopment(),
+                  builder: (context) => Settings(),
                 ),
               );
             },
