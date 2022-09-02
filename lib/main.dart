@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:depositapp/firstInstance.dart';
 import 'package:depositapp/login.dart';
 import 'package:depositapp/views/settingsLanguage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,11 +29,11 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
-  
-  @override 
+
+  @override
   State<MyApp> createState() => _MyAppState();
 
-  static void setLocale(BuildContext context, Locale newLocale){
+  static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
     state?.setLocale(newLocale);
   }
@@ -42,19 +43,20 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
 
-  setLocale(Locale locale){
+  setLocale(Locale locale) {
     setState(() {
       _locale = locale;
     });
   }
 
-  String deviceLanguage = Platform.localeName.substring(0,2);
+  String deviceLanguage = Platform.localeName.substring(0, 2);
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Deposit App',
-      home: Scaffold(body: Web3Register()),
+      home: const Scaffold(body: FirstInstance()),
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
