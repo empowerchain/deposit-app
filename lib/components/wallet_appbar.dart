@@ -28,7 +28,7 @@ class _WalletAppBarState extends State<WalletAppBar> {
 
   Widget textWallet(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(5.0, 0, 30.0, 0),
+      padding: const EdgeInsets.fromLTRB(5.0, 30.0, 30.0, 0),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Column(
