@@ -1,8 +1,6 @@
-import 'package:depositapp/login.dart';
 import 'package:depositapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -32,81 +30,51 @@ class _SettingsState extends State<Settings> {
         body: Container(
           alignment: Alignment.topLeft,
           child: Column(children: [
-            SizedBox(height: 40.0),
-            PopupMenuButton(
-              elevation: 15.0,
+            SizedBox(
+              height: 40.0,
+            ),
+            InkWell(
+              onTap: () => Navigator.pushNamed(context, "/language"),
               child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 15.0,
-                  left: 20.0,
-                  right: 20.0,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
-                  width: MediaQuery.of(context).size.width / 2,
-                  color: Colors.black,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 8.0,
-                      bottom: 8.0,
-                      left: 15.0,
-                      right: 15.0,
-                    ),
-                    child: Row(
-                      children: const [
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Text(
-                          "Language",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(104, 223, 87, 1),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5.0,
-                        ),
-                        Icon(Icons.public)
-                      ],
-                    ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),  
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                   ),
+                  child: Row(children: [
+                    SizedBox(
+                      width: 30.0,
+                      height: 40.0,
+                    ),
+                    const Icon(
+                      Icons.language,
+                      size: 25.0,
+                      color: Color.fromRGBO(103, 224, 86, 1),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                      height: 30.0,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.language,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ]),
                 ),
               ),
-              itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                const PopupMenuItem(
-                  child: SizedBox(
-                      child: Padding(
-                    padding: EdgeInsets.only(
-                        top: 10, bottom: 10, left: 40, right: 40),
-                    child: ListTile(
-                      leading: Text(
-                        "🇬🇧",
-                        style: TextStyle(fontSize: 35.0),
-                      ),
-                      title: Text('English'),
-                    ),
-                  )),
-                  //
-                  // onTap: () => null;
-                ),
-                const PopupMenuItem(
-                  child: SizedBox(
-                      child: Padding(
-                    padding: EdgeInsets.only(
-                        top: 10, bottom: 10, left: 40, right: 40),
-                    child: ListTile(
-                      leading: Text(
-                        "🇵🇹",
-                        style: TextStyle(fontSize: 35.0),
-                      ),
-                      title: Text('Portugues'),
-                    ),
-                  )),
-                  //
-                  // onTap: () => null;
-                ),
-              ],
             ),
           ]),
         ));
