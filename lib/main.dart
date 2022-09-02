@@ -25,13 +25,32 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  String deviceLanguage = Platform.localeName.substring(0,2);
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
   
+  @override 
+  State<MyApp> createState() => _MyAppState();
+
+  static void setLocale(BuildContext context, Locale newLocale){
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    state?.setLocale(newLocale);
+  }
+}
+
+
+class _MyAppState extends State<MyApp> {
+  Locale? _locale;
+
+  setLocale(Locale locale){
+    setState(() {
+      _locale = locale;
+    });
+  }
+
+  String deviceLanguage = Platform.localeName.substring(0,2);
+
   @override
   Widget build(BuildContext context) {
-    Locale language = Locale(deviceLanguage);
-
     return MaterialApp(
       title: 'Deposit App',
       home: Scaffold(body: Web3Register()),
@@ -43,17 +62,9 @@ class MyApp extends StatelessWidget {
         '/myProfile': (context) => const MyProfile(),
         '/underDevelopment': (context) => const UnderDevelopment(),
       },
-      locale: language,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en', ''), // English, no country code
-        Locale('pt', ''), // Spanish, no country code
-      ],
+      locale: _locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
