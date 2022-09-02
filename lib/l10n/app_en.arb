@@ -126,5 +126,13 @@
     "wrongmail": "Please add a valid mail",
     "@wrongmail": {
       "description": "Message of wrong mail"
+    },
+    "language": "Language",
+    "@language": {
+      "description": "Language text"
+    },
+    "login": "Login",
+    "@login": {
+      "description": "Main title of login view"
     }
 }

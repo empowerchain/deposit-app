@@ -126,5 +126,13 @@
     "wrongmail": "Por favor escreva un correo válido",
     "@wrongmail": {
       "description": "Message of wrong mail"
+    },
+    "language": "Idioma",
+    "@language": {
+      "description": "Language text"
+    },
+    "login": "Inicie Sessão",
+    "@login": {
+      "description": "Main title of login view"
     }
 }
