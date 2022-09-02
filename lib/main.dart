@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:depositapp/login.dart';
+import 'package:depositapp/views/settingsLanguage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:depositapp/views/myProfile.dart';
@@ -60,6 +61,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => Web3Register(),
         '/homepage': (context) => const HomePage(),
         '/myProfile': (context) => const MyProfile(),
+        '/language': (context) => const SettingsLanguage(),
         '/underDevelopment': (context) => const UnderDevelopment(),
       },
       locale: _locale,
