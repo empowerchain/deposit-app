@@ -134,5 +134,9 @@
     "login": "Inicie Sessão",
     "@login": {
       "description": "Main title of login view"
+    },
+    "logout": "Encerrar Sessão",
+    "@logout": {
+      "description": "Login > Account > Logout"
     }
 }
