@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/firstInstance.dart';
 import 'package:depositapp/login.dart';
 import 'package:depositapp/views/settingsLanguage.dart';
@@ -21,6 +22,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  await UserSimplePreferences.init();
+
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
@@ -39,9 +42,10 @@ class MyApp extends StatefulWidget {
   }
 }
 
-
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
+  String deviceLanguage = Platform.localeName.substring(0, 2); // gets locale of device
+  String currentLocale = UserSimplePreferences.getLocale(); // checks if stored locale exists
 
   setLocale(Locale locale) {
     setState(() {
@@ -49,11 +53,9 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  String deviceLanguage = Platform.localeName.substring(0, 2);
-
   @override
   Widget build(BuildContext context) {
-
+    Locale? locale = currentLocale != '' ? Locale(currentLocale) : Locale(deviceLanguage);
     return MaterialApp(
       title: 'Deposit App',
       home: const Scaffold(body: FirstInstance()),
@@ -66,7 +68,7 @@ class _MyAppState extends State<MyApp> {
         '/language': (context) => const SettingsLanguage(),
         '/underDevelopment': (context) => const UnderDevelopment(),
       },
-      locale: _locale,
+      locale: _locale ?? locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
