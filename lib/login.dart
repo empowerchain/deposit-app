@@ -83,9 +83,9 @@ class _Web3Register extends State<Web3Register> {
           const SizedBox(
             height: 60.0,
           ),
-          const Text(
-            "LOG IN",
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.login,
+            style: const TextStyle(
                 color: Color.fromRGBO(104, 223, 87, 1),
                 fontWeight: FontWeight.bold,
                 fontSize: 24),

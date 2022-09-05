@@ -135,9 +135,9 @@ class _AccountState extends State<Account> {
             children: [
               const SizedBox(width: 25.0),
               GestureDetector(
-                child: const Text(
-                  "Log out",
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.logout,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 169, 169, 169),
                   ),
