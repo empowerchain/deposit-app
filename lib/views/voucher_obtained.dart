@@ -1,4 +1,5 @@
 import 'package:depositapp/api_functions.dart';
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,19 +22,15 @@ class _VoucherObtainedState extends State<VoucherObtained> {
   String publicKey = '';
   @override
   void initState() {
-    SharedPreferences.getInstance().then((value) {
-      setState(() {
-        publicKey = value.getString("public-key") as String;
-      });
+    publicKey = UserSimplePreferences.getPublicKey();
 
-      depositClaim(widget.token, publicKey, widget.code).then(
-        (value) {
-          setState(() {
-            content = value;
-          });
-        },
-      );
-    });
+    depositClaim(widget.token, publicKey, widget.code).then(
+      (value) {
+        setState(() {
+          content = value;
+        });
+      },
+    );
   }
 
   @override
@@ -69,7 +66,6 @@ class _VoucherObtainedState extends State<VoucherObtained> {
               height: 80.0,
             ),
             ElevatedButton(
-              // onPressed: (() => debugPrint("QrCode")),
               onPressed: () => Navigator.pop(context),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(

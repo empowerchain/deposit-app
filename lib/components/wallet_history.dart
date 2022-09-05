@@ -1,5 +1,6 @@
 import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/transaction.dart';
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/components/wallet_transaction_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,9 +40,8 @@ class _WalletHistoryState extends State<WalletHistory> {
   }
 
   Future<List<Widget>> _getHistory() async {
-    final prefs = await SharedPreferences.getInstance();
-    final String token = prefs.getString('token') as String;
-    final String pubKey = prefs.getString('public-key') as String;
+    final token = UserSimplePreferences.getToken();
+    final pubKey = UserSimplePreferences.getPublicKey();
 
     var history = await getHistory(
       pubKey,

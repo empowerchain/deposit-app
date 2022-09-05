@@ -1,3 +1,4 @@
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,12 +12,6 @@ class SettingsLanguage extends StatefulWidget {
 }
 
 class _SettingsLanguageState extends State<SettingsLanguage> {
-  dynamic prefs;
-
-  @override
-  void initState() async {
-    final prefs = await SharedPreferences.getInstance();
-  }
 
   Widget languageOption(
       BuildContext context, String flag, String language, String locale) {
@@ -67,7 +62,7 @@ class _SettingsLanguageState extends State<SettingsLanguage> {
           ),
         ),
         onTap: () {
-          prefs.setString("language", locale); // True = Language setted
+          UserSimplePreferences.setLocale(locale); // True = Language setted
           MyApp.setLocale(context, Locale(locale));
         },
       ),

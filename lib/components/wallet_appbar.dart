@@ -1,4 +1,5 @@
 import 'package:depositapp/api_functions.dart';
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/views/underDevelopment.dart';
 import 'package:depositapp/views/vouchers.dart';
 import 'package:flutter/material.dart';
@@ -13,18 +14,8 @@ class WalletAppBar extends StatefulWidget {
 }
 
 class _WalletAppBarState extends State<WalletAppBar> {
-  String? token = '';
-  String? userPubKey = '';
-
-  @override
-  void initState() {
-    getPreferences().then(
-      (value) => setState(() {
-        token = value["token"] as String;
-        userPubKey = value["pubKey"] as String;
-      }),
-    );
-  }
+  String token = UserSimplePreferences.getToken();
+  String userPubKey = UserSimplePreferences.getPublicKey();
 
   Widget textWallet(BuildContext context) {
     return Padding(

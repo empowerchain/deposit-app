@@ -1,3 +1,4 @@
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/crypto_functions.dart';
 import 'package:flutter/material.dart';
 import 'dart:collection';
@@ -16,7 +17,6 @@ class Web3Register extends StatefulWidget {
 }
 
 class _Web3Register extends State<Web3Register> {
-  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   var mailController = TextEditingController();
   String? _result;
   String _mail = '';
@@ -181,7 +181,6 @@ class _Web3Register extends State<Web3Register> {
     return () async {
       try {
         final Web3AuthResponse response = await method();
-        final prefs = await SharedPreferences.getInstance();
         var privKey = response.privKey;
         var ec = getS256();
         var privHex = PrivateKey.fromHex(ec, privKey!);
@@ -189,14 +188,17 @@ class _Web3Register extends State<Web3Register> {
         var email = response.userInfo!.email.toString();
         var name = response.userInfo!.name.toString();
         String authToken = createToken(privKey);
-        await prefs.setString('token', authToken);
-        await prefs.setString('public-key', pubKey);
-        await prefs.setString('email', email);
-        await prefs.setString('name', name);
+
+        await UserSimplePreferences.setLocale(name);
+        await UserSimplePreferences.setMail(email);
+        await UserSimplePreferences.setName(name);
+        await UserSimplePreferences.setPublicKey(pubKey);
+        await UserSimplePreferences.setUsername(name);
+        await UserSimplePreferences.setToken(authToken);
         setState(() {
-          _result = prefs.getString('token');
-          _mail = response.userInfo!.email.toString();
-          _name = response.userInfo!.name.toString();
+          _result = UserSimplePreferences.getToken();
+          _mail = UserSimplePreferences.getMail();
+          _name = UserSimplePreferences.getName();
         });
         await Navigator.pushNamed(context, "/homepage");
       } on UserCancelledException {

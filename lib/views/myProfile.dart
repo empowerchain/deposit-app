@@ -1,3 +1,4 @@
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/views/sendMyProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,8 +12,8 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
-  String name = '';
-  String email = '';
+  String name = UserSimplePreferences.getName();
+  String email = UserSimplePreferences.getMail();
   bool notMail = false;
 
   Map<String, TextEditingController> controllers = {
@@ -26,15 +27,6 @@ class _MyProfileState extends State<MyProfile> {
     "lastName": false,
     "email": false,
   };
-
-  void initState() {
-    SharedPreferences.getInstance().then((value) {
-      setState(() {
-        name = value.getString("name") as String;
-        email = value.getString("email") as String;
-      });
-    });
-  }
 
   Widget characteristic(String className, String value, String data) {
     return Container(
@@ -136,9 +128,9 @@ class _MyProfileState extends State<MyProfile> {
                   ? name
                   : controllers["firstName"]!.text;
               String lastName = controllers["lastName"]!.text;
-              String mail = controllers["Email"]!.text == ""
+              String mail = controllers["email"]!.text == ""
                   ? email
-                  : controllers["Email"]!.text;
+                  : controllers["email"]!.text;
               Navigator.push(
                 context,
                 MaterialPageRoute(
