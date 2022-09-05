@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 Future<List<dynamic>> getVouchersForUser(
     String? userPubKey, String? token) async {
@@ -123,14 +121,4 @@ Future<Map<String, dynamic>> depositClaim(
   } else {
     return {};
   }
-}
-
-Future<Map<String, String>> getPreferences() async {
-  final prefs = await SharedPreferences.getInstance();
-  final String token = prefs.getString('token') as String;
-  final String pubKey = prefs.getString('public-key') as String;
-  return {
-    "token": token,
-    "pubKey": pubKey,
-  };
 }
