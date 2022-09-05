@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/firstInstance.dart';
 import 'package:depositapp/login.dart';
+import 'package:depositapp/views/settingsLanguage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:depositapp/views/myProfile.dart';
@@ -17,39 +22,55 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  await UserSimplePreferences.init();
+
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    state?.setLocale(newLocale);
+  }
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale? _locale;
+  String deviceLanguage = Platform.localeName.substring(0, 2); // gets locale of device
+  String currentLocale = UserSimplePreferences.getLocale(); // checks if stored locale exists
+
+  setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    Locale language = const Locale('en');
-
+    Locale? locale = currentLocale != '' ? Locale(currentLocale) : Locale(deviceLanguage);
     return MaterialApp(
       title: 'Deposit App',
-      home: Scaffold(body: Web3Register()),
+      home: const Scaffold(body: FirstInstance()),
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/login': (context) => Web3Register(),
         '/homepage': (context) => const HomePage(),
         '/myProfile': (context) => const MyProfile(),
+        '/language': (context) => const SettingsLanguage(),
         '/underDevelopment': (context) => const UnderDevelopment(),
       },
-      locale: language,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en', ''), // English, no country code
-        Locale('pt', ''), // Spanish, no country code
-      ],
+      locale: _locale ?? locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -62,7 +62,6 @@ class _SendMyProfileState extends State<SendMyProfile> {
                   checkColor: Colors.white,
                   value: inputByUser != "" ? _isEnable[parameter] : false,
                   onChanged: ((value) {
-                    print(parameter);
                     setState(() {
                       _isEnable[parameter] = !_isEnable[parameter]!;
                     });

@@ -72,9 +72,6 @@ class _VouchersState extends State<Vouchers> {
   Future<List<Widget>> _getVouchers() async {
     final vouchersAvailable =
         await getVouchersForUser(widget.userPubKey, widget.token);
-    print(widget.token);
-    print(widget.userPubKey);
-    print(vouchersAvailable);
     return vouchersAvailable.map(
       (item) {
         Map voucherData = item["voucher"];

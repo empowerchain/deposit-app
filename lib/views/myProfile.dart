@@ -1,3 +1,4 @@
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/views/sendMyProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,32 +12,23 @@ class MyProfile extends StatefulWidget {
 }
 
 class _MyProfileState extends State<MyProfile> {
-  String name = '';
-  String email = '';
+  String name = UserSimplePreferences.getName();
+  String email = UserSimplePreferences.getMail();
   bool notMail = false;
 
   Map<String, TextEditingController> controllers = {
-    "First Name": TextEditingController(),
-    "Last Name": TextEditingController(),
-    "Email": TextEditingController()
+    "firstName": TextEditingController(),
+    "lastName": TextEditingController(),
+    "email": TextEditingController()
   };
 
   Map<String, bool> _isEnable = {
-    "First Name": false,
-    "Last Name": false,
-    "Email": false,
+    "firstName": false,
+    "lastName": false,
+    "email": false,
   };
 
-  void initState() {
-    SharedPreferences.getInstance().then((value) {
-      setState(() {
-        name = value.getString("name") as String;
-        email = value.getString("email") as String;
-      });
-    });
-  }
-
-  Widget characteristic(String value, String data) {
+  Widget characteristic(String className, String value, String data) {
     return Container(
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -53,7 +45,7 @@ class _MyProfileState extends State<MyProfile> {
                 width: 150.0,
                 child: TextField(
                   controller: controllers[data],
-                  onChanged: value == "Email"
+                  onChanged: className == "email"
                       ? (String input) {
                           bool verifyMail = RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -85,7 +77,7 @@ class _MyProfileState extends State<MyProfile> {
             width: 15,
           ),
           TextButton(
-            child: _isEnable[value]!
+            child: _isEnable[className]!
                 ? Text(
                     AppLocalizations.of(context)!.save,
                     style: TextStyle(
@@ -103,7 +95,7 @@ class _MyProfileState extends State<MyProfile> {
             onPressed: () {
               setState(
                 () {
-                  _isEnable[value] = !_isEnable[value]!;
+                  _isEnable[className] = !_isEnable[className]!;
                 },
               );
             },
@@ -132,9 +124,13 @@ class _MyProfileState extends State<MyProfile> {
         actions: [
           IconButton(
             onPressed: () {
-              String firstName = controllers["First Name"]!.text == "" ? name : controllers["First Name"]!.text;
-              String lastName = controllers["Last Name"]!.text;
-              String mail = controllers["Email"]!.text == "" ? email : controllers["Email"]!.text;
+              String firstName = controllers["firstName"]!.text == ""
+                  ? name
+                  : controllers["firstName"]!.text;
+              String lastName = controllers["lastName"]!.text;
+              String mail = controllers["email"]!.text == ""
+                  ? email
+                  : controllers["email"]!.text;
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -159,9 +155,11 @@ class _MyProfileState extends State<MyProfile> {
             crossAxisAlignment:
                 CrossAxisAlignment.center, //Center Row contents vertically,
             children: [
-              characteristic(AppLocalizations.of(context)!.firstname, name),
-              characteristic(AppLocalizations.of(context)!.lastname, ""),
-              characteristic("Email", email),
+              characteristic(
+                  "firstName", AppLocalizations.of(context)!.firstname, name),
+              characteristic(
+                  "lastName", AppLocalizations.of(context)!.lastname, ""),
+              characteristic("email", "Email", email),
               notMail ? Text("sup") : SizedBox(),
             ],
           ),

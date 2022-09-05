@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:depositapp/api_functions.dart';
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/views/voucher_obtained.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,16 +17,8 @@ class Deposit extends StatefulWidget {
 
 class _DepositState extends State<Deposit> {
   String _scanBarcode = 'Unknown'; // Where QR info is contained
-  String token = '';
+  String token = UserSimplePreferences.getToken();
   String? publicKey;
-
-  @override
-  void initState() {
-    super.initState();
-    getPreferences().then((value) {
-      token = value["token"] as String;
-    });
-  }
 
   Future<void> scanQR() async {
     String barcodeScanRes;
@@ -34,32 +27,40 @@ class _DepositState extends State<Deposit> {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
       List scanSplit = barcodeScanRes.split('=');
-      if (scanSplit.length > 1){
+      if (scanSplit.length > 1) {
         barcodeScanRes = scanSplit[1];
-      }
-      else{
+        setState(
+          () {
+            _scanBarcode = barcodeScanRes;
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => VoucherObtained(barcodeScanRes, token),
+              ),
+            );
+          },
+        );
+      } else {
         barcodeScanRes = '';
+        setState(
+          () {
+            _scanBarcode = barcodeScanRes;
+          },
+        );
       }
     } on PlatformException {
       barcodeScanRes = '';
+      setState(
+        () {
+          _scanBarcode = barcodeScanRes;
+        },
+      );
     }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
-    setState(
-      () {
-        _scanBarcode = barcodeScanRes;
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => VoucherObtained(barcodeScanRes, token),
-          ),
-        );
-      },
-    );
   }
 
   @override
@@ -71,7 +72,6 @@ class _DepositState extends State<Deposit> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              // onPressed: (() => debugPrint("QrCode")),
               onPressed: () => scanQR(),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(

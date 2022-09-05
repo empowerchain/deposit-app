@@ -1,3 +1,4 @@
+import 'package:depositapp/classes/userSimplePreferences.dart';
 import 'package:depositapp/login.dart';
 import 'package:depositapp/views/myProfile.dart';
 import 'package:depositapp/views/settings.dart';
@@ -14,7 +15,6 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
-  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
   var originalAddress = "cosmos19r3jlewte0mfazu9p2u5nn9j63c8mtw0h7h2rg";
 
   Widget option(BuildContext context, final String icon, String textDisplay,
@@ -77,7 +77,7 @@ class _AccountState extends State<Account> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => UnderDevelopment(),
+                  builder: (context) => Settings(),
                 ),
               );
             },
@@ -145,11 +145,10 @@ class _AccountState extends State<Account> {
                     color: Color.fromARGB(255, 169, 169, 169),
                   ),
                 ),
-                onTap: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  await prefs.clear().then(
-                        (value) => Navigator.pop(context),
-                      );
+                onTap: () {
+                  UserSimplePreferences.clear().then(
+                    (value) => Navigator.pop(context),
+                  );
                 },
               ),
             ],
