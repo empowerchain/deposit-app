@@ -28,7 +28,7 @@ class _MyProfileState extends State<MyProfile> {
   };
 
   Widget characteristic(String className, String value, String data) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
@@ -40,7 +40,7 @@ class _MyProfileState extends State<MyProfile> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(
+              SizedBox(
                 width: 150.0,
                 child: TextField(
                   controller: controllers[data],

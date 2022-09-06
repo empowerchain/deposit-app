@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -33,20 +34,20 @@ class _SendMyProfileState extends State<SendMyProfile> {
 
     String inputByUser = _values[parameter]!;
 
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          SizedBox(width: 20.0),
+          const SizedBox(width: 20.0),
           Expanded(child: Text(parameter)),
-          SizedBox(
+          const SizedBox(
             width: 20.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Text(inputByUser),
-              Container(
+              SizedBox(
                 width: 50.0,
                 child: Checkbox(
                   activeColor: Colors.transparent,
@@ -55,7 +56,7 @@ class _SendMyProfileState extends State<SendMyProfile> {
                     if (inputByUser == "") {
                       return Colors.black38.withOpacity(.32);
                     }
-                    return Color.fromRGBO(104, 223, 87, 1);
+                    return const Color.fromRGBO(104, 223, 87, 1);
                   }),
                   checkColor: Colors.white,
                   value: inputByUser != "" ? _isEnable[parameter] : false,
@@ -68,7 +69,7 @@ class _SendMyProfileState extends State<SendMyProfile> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
         ],

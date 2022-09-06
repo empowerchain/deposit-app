@@ -38,7 +38,7 @@ class _VoucherObtainedState extends State<VoucherObtained> {
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-      child: Container(
+      child: SizedBox(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

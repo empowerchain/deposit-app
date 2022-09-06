@@ -17,7 +17,7 @@ class _WalletHistoryState extends State<WalletHistory> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
+      child: SizedBox(
         // do not touch
         child: FutureBuilder(
           initialData: null,
