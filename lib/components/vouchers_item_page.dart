@@ -131,7 +131,7 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                                     setState(() {
                                       activated = true;
                                     });
-                                    Future.delayed(Duration(seconds: 1));
+                                    Future.delayed(const Duration(seconds: 1));
                                     Navigator.of(context)
                                       ..pop()
                                       ..pop()

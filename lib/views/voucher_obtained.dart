@@ -74,7 +74,7 @@ class _VoucherObtainedState extends State<VoucherObtained> {
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
                     const Color.fromRGBO(104, 223, 87, 1)),
-                minimumSize: MaterialStateProperty.all<Size>(Size(300, 40)),
+                minimumSize: MaterialStateProperty.all<Size>(const Size(300, 40)),
               ),
               child: Text(
                 AppLocalizations.of(context)!.done,

@@ -29,7 +29,7 @@ class _SettingsState extends State<Settings> {
         body: Container(
           alignment: Alignment.topLeft,
           child: Column(children: [
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             InkWell(
@@ -39,7 +39,7 @@ class _SettingsState extends State<Settings> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                         bottomLeft: Radius.circular(10),
@@ -49,12 +49,12 @@ class _SettingsState extends State<Settings> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 1,
                         blurRadius: 3,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
                   child: Row(children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 30.0,
                       height: 40.0,
                     ),
@@ -63,13 +63,13 @@ class _SettingsState extends State<Settings> {
                       size: 25.0,
                       color: Color.fromRGBO(103, 224, 86, 1),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10.0,
                       height: 30.0,
                     ),
                     Text(
                       AppLocalizations.of(context)!.language,
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ]),
                 ),

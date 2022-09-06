@@ -32,9 +32,9 @@ class _MyProfileState extends State<MyProfile> {
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          SizedBox(width: 20.0),
+          const SizedBox(width: 20.0),
           Expanded(child: Text(value)),
-          SizedBox(
+          const SizedBox(
             width: 20.0,
           ),
           Row(
@@ -72,21 +72,21 @@ class _MyProfileState extends State<MyProfile> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           TextButton(
             child: _isEnable[className]!
                 ? Text(
                     AppLocalizations.of(context)!.save,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(96, 200, 248, 1),
                     ),
                   )
                 : Text(
                     AppLocalizations.of(context)!.edit,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(96, 200, 248, 1),
                     ),
