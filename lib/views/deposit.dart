@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'package:depositapp/api_functions.dart';
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/views/voucher_obtained.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Deposit extends StatefulWidget {
   const Deposit({super.key});
@@ -16,7 +14,6 @@ class Deposit extends StatefulWidget {
 }
 
 class _DepositState extends State<Deposit> {
-  String _scanBarcode = 'Unknown'; // Where QR info is contained
   String token = UserSimplePreferences.getToken();
   String? publicKey;
 
@@ -29,32 +26,18 @@ class _DepositState extends State<Deposit> {
       List scanSplit = barcodeScanRes.split('=');
       if (scanSplit.length > 1) {
         barcodeScanRes = scanSplit[1];
-        setState(
-          () {
-            _scanBarcode = barcodeScanRes;
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => VoucherObtained(barcodeScanRes, token),
-              ),
-            );
-          },
+        if (!mounted) return;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VoucherObtained(barcodeScanRes, token),
+          ),
         );
       } else {
         barcodeScanRes = '';
-        setState(
-          () {
-            _scanBarcode = barcodeScanRes;
-          },
-        );
       }
     } on PlatformException {
       barcodeScanRes = '';
-      setState(
-        () {
-          _scanBarcode = barcodeScanRes;
-        },
-      );
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -66,7 +49,7 @@ class _DepositState extends State<Deposit> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +64,7 @@ class _DepositState extends State<Deposit> {
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
                     const Color.fromRGBO(104, 223, 87, 1)),
-                minimumSize: MaterialStateProperty.all<Size>(Size(300, 40)),
+                minimumSize: MaterialStateProperty.all<Size>(const Size(300, 40)),
               ),
               child: Text(
                 AppLocalizations.of(context)!.claimDepositReward,
@@ -91,8 +74,6 @@ class _DepositState extends State<Deposit> {
                 ),
               ),
             ),
-            // Text('Scan result : $_scanBarcode\n',
-            //     style: TextStyle(fontSize: 20))
           ],
         ),
       ),

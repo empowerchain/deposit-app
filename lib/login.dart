@@ -1,26 +1,25 @@
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/crypto_functions.dart';
 import 'package:flutter/material.dart';
 import 'dart:collection';
 import 'dart:async';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:elliptic/elliptic.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web3auth_flutter/enums.dart';
 import 'package:web3auth_flutter/input.dart';
 import 'package:web3auth_flutter/output.dart';
 import 'package:web3auth_flutter/web3auth_flutter.dart';
 
 class Web3Register extends StatefulWidget {
+  const Web3Register({super.key});
+
   @override
   State<Web3Register> createState() => _Web3Register();
 }
 
 class _Web3Register extends State<Web3Register> {
   var mailController = TextEditingController();
-  String? _result;
-  String _mail = '';
-  String _name = '';
+  String mail = '';
 
   @override
   void initState() {
@@ -122,7 +121,7 @@ class _Web3Register extends State<Web3Register> {
             height: 50,
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
+            padding: const EdgeInsets.only(bottom: 10.0),
             child: infoSeparator("Use email"),
           ),
           Padding(
@@ -130,7 +129,7 @@ class _Web3Register extends State<Web3Register> {
             child: TextField(
               controller: mailController,
               onChanged: (text) {
-                _mail = text;
+                mail = text;
               },
               style: const TextStyle(fontSize: 18),
               decoration: const InputDecoration(
@@ -196,11 +195,10 @@ class _Web3Register extends State<Web3Register> {
         await UserSimplePreferences.setUsername(name);
         await UserSimplePreferences.setToken(authToken);
         setState(() {
-          _result = UserSimplePreferences.getToken();
-          _mail = UserSimplePreferences.getMail();
-          _name = UserSimplePreferences.getName();
+          mail = UserSimplePreferences.getMail();
         });
-        await Navigator.pushNamed(context, "/homepage");
+        if (!mounted) return;
+        Navigator.pushNamed(context, "/homepage");
       } on UserCancelledException {
         print("User cancelled.");
       } on UnKnownException {
@@ -228,7 +226,7 @@ class _Web3Register extends State<Web3Register> {
     return Web3AuthFlutter.login(LoginParams(
       loginProvider: Provider.email_passwordless,
       mfaLevel: MFALevel.MANDATORY,
-      extraLoginOptions: ExtraLoginOptions(login_hint: _mail),
+      extraLoginOptions: ExtraLoginOptions(login_hint: mail),
     ));
   }
 }

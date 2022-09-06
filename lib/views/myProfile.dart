@@ -1,8 +1,7 @@
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/views/sendMyProfile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -29,19 +28,19 @@ class _MyProfileState extends State<MyProfile> {
   };
 
   Widget characteristic(String className, String value, String data) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          SizedBox(width: 20.0),
+          const SizedBox(width: 20.0),
           Expanded(child: Text(value)),
-          SizedBox(
+          const SizedBox(
             width: 20.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(
+              SizedBox(
                 width: 150.0,
                 child: TextField(
                   controller: controllers[data],
@@ -73,21 +72,21 @@ class _MyProfileState extends State<MyProfile> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           TextButton(
             child: _isEnable[className]!
                 ? Text(
                     AppLocalizations.of(context)!.save,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(96, 200, 248, 1),
                     ),
                   )
                 : Text(
                     AppLocalizations.of(context)!.edit,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color.fromRGBO(96, 200, 248, 1),
                     ),

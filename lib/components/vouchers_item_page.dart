@@ -1,5 +1,5 @@
 import 'package:depositapp/api_functions.dart';
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/classes/voucher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,6 +21,7 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
 
   @override
   void initState() {
+    super.initState();
     activated = widget.voucher.used;
     token = UserSimplePreferences.getToken();
   }
@@ -130,7 +131,7 @@ class _VoucherItemPageState extends State<VoucherItemPage> {
                                     setState(() {
                                       activated = true;
                                     });
-                                    Future.delayed(Duration(seconds: 1));
+                                    Future.delayed(const Duration(seconds: 1));
                                     Navigator.of(context)
                                       ..pop()
                                       ..pop()

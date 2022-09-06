@@ -1,8 +1,7 @@
 import 'package:depositapp/api_functions.dart';
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class VoucherObtained extends StatefulWidget {
   final String code;
@@ -22,6 +21,7 @@ class _VoucherObtainedState extends State<VoucherObtained> {
   String publicKey = '';
   @override
   void initState() {
+    super.initState();
     publicKey = UserSimplePreferences.getPublicKey();
 
     depositClaim(widget.token, publicKey, widget.code).then(
@@ -38,7 +38,7 @@ class _VoucherObtainedState extends State<VoucherObtained> {
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-      child: Container(
+      child: SizedBox(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +75,7 @@ class _VoucherObtainedState extends State<VoucherObtained> {
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
                     const Color.fromRGBO(104, 223, 87, 1)),
-                minimumSize: MaterialStateProperty.all<Size>(Size(300, 40)),
+                minimumSize: MaterialStateProperty.all<Size>(const Size(300, 40)),
               ),
               child: Text(
                 AppLocalizations.of(context)!.done,

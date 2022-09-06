@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:depositapp/classes/userSimplePreferences.dart';
-import 'package:depositapp/firstInstance.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
+import 'package:depositapp/first_instance.dart';
 import 'package:depositapp/login.dart';
 import 'package:depositapp/views/settingsLanguage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,7 +10,6 @@ import 'package:depositapp/views/myProfile.dart';
 import 'package:depositapp/views/underDevelopment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'firebase_options.dart';
 import 'views/home_page.dart';
@@ -27,7 +26,7 @@ void main() async {
   // Pass all uncaught errors from the framework to Crashlytics.
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -62,7 +61,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/login': (context) => Web3Register(),
+        '/login': (context) => const Web3Register(),
         '/homepage': (context) => const HomePage(),
         '/myProfile': (context) => const MyProfile(),
         '/language': (context) => const SettingsLanguage(),

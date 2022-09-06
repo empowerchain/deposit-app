@@ -1,10 +1,7 @@
-import 'package:depositapp/api_functions.dart';
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/login.dart';
-import 'package:depositapp/main.dart';
 import 'package:depositapp/views/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstInstance extends StatefulWidget {
   const FirstInstance({Key? key}) : super(key: key);
@@ -27,6 +24,6 @@ class _FirstInstanceState extends State<FirstInstance> {
 
   @override
   Widget build(BuildContext context) {
-    return userAvailable ? const HomePage() : Web3Register();
+    return userAvailable ? const HomePage() : const Web3Register();
   }
 }

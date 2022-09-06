@@ -1,9 +1,8 @@
 import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/transaction.dart';
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/components/wallet_transaction_item.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WalletHistory extends StatefulWidget {
   const WalletHistory({super.key});
@@ -18,7 +17,7 @@ class _WalletHistoryState extends State<WalletHistory> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
+      child: SizedBox(
         // do not touch
         child: FutureBuilder(
           initialData: null,
@@ -57,13 +56,13 @@ class _WalletHistoryState extends State<WalletHistory> {
         if (numberOfRewardsString.length > 1){
           String decimals = numberOfRewardsString[1];
           if (decimals.length > 1){
-            finalNumber = finalNumber + "." + decimals.substring(0,2);
+            finalNumber = "$finalNumber.${decimals.substring(0,2)}";
           }
           else {
-            finalNumber = finalNumber + "." + decimals[0];
+            finalNumber = "$finalNumber.${decimals[0]}";
           }
         }
-        String answer = "+${finalNumber} ${item['unitNameIn']}";
+        String answer = "+$finalNumber ${item['unitNameIn']}";
         String time = item['eventTime'].split('T')[0];
         Transaction currentTx = Transaction(nameAction, '', time, answer);
         return TransactionItem(currentTx);

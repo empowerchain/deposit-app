@@ -1,8 +1,7 @@
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsLanguage extends StatefulWidget {
   const SettingsLanguage({super.key});
@@ -12,7 +11,6 @@ class SettingsLanguage extends StatefulWidget {
 }
 
 class _SettingsLanguageState extends State<SettingsLanguage> {
-
   Widget languageOption(
       BuildContext context, String flag, String language, String locale) {
     return Column(children: [
@@ -32,31 +30,31 @@ class _SettingsLanguageState extends State<SettingsLanguage> {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 1,
                   blurRadius: 3,
-                  offset: Offset(0, 3), // changes position of shadow
+                  offset: const Offset(0, 3), // changes position of shadow
                 ),
               ],
             ),
             child: Row(children: [
-              SizedBox(
+              const SizedBox(
                 width: 20.0,
                 height: 40.0,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10.0,
                 height: 30.0,
               ),
               RichText(
                 text: TextSpan(children: <TextSpan>[
-                  TextSpan(text: flag, style: TextStyle(fontSize: 25))
+                  TextSpan(text: flag, style: const TextStyle(fontSize: 25))
                 ]),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10.0,
                 height: 30.0,
               ),
               Text(
                 language,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
             ]),
           ),
@@ -66,7 +64,7 @@ class _SettingsLanguageState extends State<SettingsLanguage> {
           MyApp.setLocale(context, Locale(locale));
         },
       ),
-      SizedBox(
+      const SizedBox(
         height: 20.0,
       )
     ]);
@@ -92,7 +90,7 @@ class _SettingsLanguageState extends State<SettingsLanguage> {
         body: Container(
           alignment: Alignment.topLeft,
           child: Column(children: [
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             languageOption(context, "🇬🇧", "English", "en"),

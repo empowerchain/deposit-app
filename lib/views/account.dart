@@ -1,4 +1,4 @@
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/main.dart';
 import 'package:depositapp/views/settings.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +74,7 @@ class _AccountState extends State<Account> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Settings(),
+                  builder: (context) => const Settings(),
                 ),
               );
             },
