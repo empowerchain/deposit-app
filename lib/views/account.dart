@@ -1,11 +1,8 @@
 import 'package:depositapp/classes/userSimplePreferences.dart';
-import 'package:depositapp/login.dart';
-import 'package:depositapp/views/myProfile.dart';
+import 'package:depositapp/main.dart';
 import 'package:depositapp/views/settings.dart';
-import 'package:depositapp/views/underDevelopment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -138,17 +135,20 @@ class _AccountState extends State<Account> {
             children: [
               const SizedBox(width: 25.0),
               GestureDetector(
-                child: const Text(
-                  "Log out",
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.logout,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 169, 169, 169),
                   ),
                 ),
                 onTap: () {
-                  UserSimplePreferences.clear().then(
-                    (value) => Navigator.pop(context),
-                  );
+                  UserSimplePreferences.clear().then((value) =>
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  const MyApp())));
                 },
               ),
             ],
