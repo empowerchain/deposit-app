@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:depositapp/classes/voucher.dart';
 import 'package:depositapp/components/vouchers_item_page.dart';
 import 'package:flutter/material.dart';

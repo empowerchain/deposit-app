@@ -66,6 +66,7 @@ Future<List<dynamic>> getHistory(String? userPubKey, String? token) async {
     headers: {"Authorization": currentToken},
     body: body,
   );
+
   Map<String, dynamic> responseBody = jsonDecode(response.body);
   if (response.statusCode == 200) {
     List<dynamic> history = responseBody["events"];
