@@ -21,6 +21,7 @@ class _VoucherObtainedState extends State<VoucherObtained> {
   String publicKey = '';
   @override
   void initState() {
+    super.initState();
     publicKey = UserSimplePreferences.getPublicKey();
 
     depositClaim(widget.token, publicKey, widget.code).then(
