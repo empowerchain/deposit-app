@@ -1,10 +1,8 @@
-import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/views/underDevelopment.dart';
 import 'package:depositapp/views/vouchers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class WalletAppBar extends StatefulWidget {
   const WalletAppBar({super.key});

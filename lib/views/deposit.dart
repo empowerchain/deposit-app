@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/views/voucher_obtained.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Deposit extends StatefulWidget {
   const Deposit({super.key});

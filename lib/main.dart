@@ -10,7 +10,6 @@ import 'package:depositapp/views/myProfile.dart';
 import 'package:depositapp/views/underDevelopment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'firebase_options.dart';
 import 'views/home_page.dart';
