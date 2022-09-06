@@ -24,6 +24,6 @@ class _FirstInstanceState extends State<FirstInstance> {
 
   @override
   Widget build(BuildContext context) {
-    return userAvailable ? const HomePage() : Web3Register();
+    return userAvailable ? const HomePage() : const Web3Register();
   }
 }

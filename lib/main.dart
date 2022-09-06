@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        '/login': (context) => Web3Register(),
+        '/login': (context) => const Web3Register(),
         '/homepage': (context) => const HomePage(),
         '/myProfile': (context) => const MyProfile(),
         '/language': (context) => const SettingsLanguage(),
