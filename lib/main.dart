@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:depositapp/classes/user_simple_preferences.dart';
-import 'package:depositapp/firstInstance.dart';
+import 'package:depositapp/first_instance.dart';
 import 'package:depositapp/login.dart';
 import 'package:depositapp/views/settingsLanguage.dart';
 import 'package:firebase_core/firebase_core.dart';
