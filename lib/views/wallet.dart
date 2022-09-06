@@ -17,7 +17,7 @@ class _WalletState extends State<Wallet> {
       children: const [
         WalletAppBar(),
         SizedBox(height: 10.0),
-        walletHistoryTitle(),
+        WalletHistoryTitle(),
         WalletHistory(),
       ],
     );

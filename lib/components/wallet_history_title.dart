@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class walletHistoryTitle extends StatelessWidget {
-  const walletHistoryTitle({Key? key}) : super(key: key);
+class WalletHistoryTitle extends StatelessWidget {
+  const WalletHistoryTitle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
