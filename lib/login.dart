@@ -11,13 +11,14 @@ import 'package:web3auth_flutter/output.dart';
 import 'package:web3auth_flutter/web3auth_flutter.dart';
 
 class Web3Register extends StatefulWidget {
+  const Web3Register({super.key});
+
   @override
   State<Web3Register> createState() => _Web3Register();
 }
 
 class _Web3Register extends State<Web3Register> {
   var mailController = TextEditingController();
-  String? _result;
   String _mail = '';
   String _name = '';
 
@@ -195,7 +196,6 @@ class _Web3Register extends State<Web3Register> {
         await UserSimplePreferences.setUsername(name);
         await UserSimplePreferences.setToken(authToken);
         setState(() {
-          _result = UserSimplePreferences.getToken();
           _mail = UserSimplePreferences.getMail();
           _name = UserSimplePreferences.getName();
         });
