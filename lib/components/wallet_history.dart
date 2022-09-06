@@ -56,10 +56,10 @@ class _WalletHistoryState extends State<WalletHistory> {
         if (numberOfRewardsString.length > 1){
           String decimals = numberOfRewardsString[1];
           if (decimals.length > 1){
-            finalNumber = finalNumber + "." + decimals.substring(0,2);
+            finalNumber = "$finalNumber.${decimals.substring(0,2)}";
           }
           else {
-            finalNumber = finalNumber + "." + decimals[0];
+            finalNumber = "$finalNumber.${decimals[0]}";
           }
         }
         String answer = "+${finalNumber} ${item['unitNameIn']}";
