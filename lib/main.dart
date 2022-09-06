@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/firstInstance.dart';
 import 'package:depositapp/login.dart';
 import 'package:depositapp/views/settingsLanguage.dart';

@@ -1,5 +1,5 @@
 import 'package:depositapp/api_functions.dart';
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/views/underDevelopment.dart';
 import 'package:depositapp/views/vouchers.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:depositapp/api_functions.dart';
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/views/voucher_obtained.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

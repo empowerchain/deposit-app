@@ -1,6 +1,6 @@
 import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/transaction.dart';
-import 'package:depositapp/classes/userSimplePreferences.dart';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/components/wallet_transaction_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
