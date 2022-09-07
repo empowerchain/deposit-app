@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -19,34 +20,129 @@ class SendMyProfile extends StatefulWidget {
 }
 
 class _SendMyProfileState extends State<SendMyProfile> {
-  Map<String, bool> _isEnable = {
-    "First Name": false,
-    "Last Name": false,
-    "Email": false,
+  final Map<String, bool> isEnable = {
+    "firstName": false,
+    "lastName": false,
+    "email": false,
   };
 
-  Widget characteristic(String parameter) {
-    Map<String, String> _values = {
-      "First Name": widget.firstName,
-      "Last Name": widget.lastName,
-      "Email": widget.email,
-    };
+  Widget sendButton(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 70.0,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Map<String, String> output = {
+                "firstName": "",
+                "lastName": "",
+                "email": "",
+              };
+              if (widget.firstName != "" && isEnable["firstName"]!) {
+                output["firstName"] = widget.firstName;
+                UserSimplePreferences.setName(widget.firstName);
+              }
+              if (widget.lastName != "" && isEnable["lastName"]!) {
+                output["lastName"] = widget.lastName;
+                UserSimplePreferences.setLastName(widget.lastName);
+              }
+              if (widget.email != "" && isEnable["email"]!) {
+                output["email"] = widget.email;
+                UserSimplePreferences.setMail(widget.email);
+              }
+              print(output);
+            },
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0),
+                ),
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromRGBO(104, 223, 87, 1)),
+              minimumSize: MaterialStateProperty.all<Size>(const Size(300, 40)),
+            ),
+            child: Text(
+              AppLocalizations.of(context)!.sharemyprofile,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-    String inputByUser = _values[parameter]!;
+  Widget organization(BuildContext context) {
+    return Row(
+      children: [
+        const SizedBox(width: 20.0),
+        Expanded(
+            child: Text(
+          "Organization",
+          style: const TextStyle(
+            fontSize: 15,
+          ),
+        )),
+        const SizedBox(
+          width: 20.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Text(
+              "Temporarily Not Available",
+              style: const TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          width: 35,
+        ),
+      ],
+    );
+  }
+
+  Widget characteristic(String parameter, String id) {
+    Map<String, String> values = {
+      "firstName": widget.firstName,
+      "lastName": widget.lastName,
+      "email": widget.email,
+    };
+    String inputByUser = values[id]!;
 
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
           const SizedBox(width: 20.0),
-          Expanded(child: Text(parameter)),
+          Expanded(
+              child: Text(
+            parameter,
+            style: const TextStyle(
+              fontSize: 15,
+            ),
+          )),
           const SizedBox(
             width: 20.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text(inputByUser),
+              Text(
+                inputByUser,
+                style: const TextStyle(
+                  fontSize: 15,
+                ),
+              ),
               SizedBox(
                 width: 50.0,
                 child: Checkbox(
@@ -59,10 +155,10 @@ class _SendMyProfileState extends State<SendMyProfile> {
                     return const Color.fromRGBO(104, 223, 87, 1);
                   }),
                   checkColor: Colors.white,
-                  value: inputByUser != "" ? _isEnable[parameter] : false,
+                  value: inputByUser != "" ? isEnable[id] : false,
                   onChanged: ((value) {
                     setState(() {
-                      _isEnable[parameter] = !_isEnable[parameter]!;
+                      isEnable[id] = !isEnable[id]!;
                     });
                   }),
                 ),
@@ -96,16 +192,21 @@ class _SendMyProfileState extends State<SendMyProfile> {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 50.0),
+          organization(context),
+          const SizedBox(height: 50.0),
           Column(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
             crossAxisAlignment:
                 CrossAxisAlignment.center, //Center Row contents vertically,
             children: [
-              characteristic(AppLocalizations.of(context)!.firstname),
-              characteristic(AppLocalizations.of(context)!.lastname),
-              characteristic("Email"),
+              characteristic(
+                  AppLocalizations.of(context)!.firstname, 'firstName'),
+              characteristic(
+                  AppLocalizations.of(context)!.lastname, 'lastName'),
+              characteristic("Email", 'email'),
+              sendButton(context)
             ],
           ),
         ],
