@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSimplePreferences {
   static late dynamic _preferences;
+  static const _keyLastName = 'last-name';
   static const _keyLocale = 'locale';
   static const _keyMail = 'mail';
   static const _keyName = 'name';
@@ -11,6 +12,9 @@ class UserSimplePreferences {
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
+
+  static Future setLastName(String lastName) async =>
+      await _preferences.setString(_keyLastName, lastName);
 
   static Future setLocale(String locale) async =>
       await _preferences.setString(_keyLocale, locale);
@@ -30,6 +34,7 @@ class UserSimplePreferences {
   static Future setUsername(String username) async =>
       await _preferences.setString(_keyUsername, username);
 
+  static String getLastName() => _preferences.getString(_keyLastName) ?? '';
   static String getLocale() => _preferences.getString(_keyLocale) ?? '';
   static String getMail() => _preferences.getString(_keyMail) ?? '';
   static String getName() => _preferences.getString(_keyName) ?? '';
@@ -39,6 +44,7 @@ class UserSimplePreferences {
 
   static Future clear() async {
     await _preferences.remove(_keyMail);
+    await _preferences.remove(_keyLastName);
     await _preferences.remove(_keyName);
     await _preferences.remove(_keyPublicKey);
     await _preferences.remove(_keyToken);
