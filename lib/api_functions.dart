@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+const apiUrl = "https://qa-deposit-pqu2.encr.app/"; // QA url
+
 Future<List<dynamic>> getVouchersForUser(
     String? userPubKey, String? token) async {
   String currentToken = "Bearer $token";
@@ -8,7 +10,7 @@ Future<List<dynamic>> getVouchersForUser(
 
   final response = await http.post(
     Uri.parse(
-        'https://staging-deposit-pqu2.encr.app/deposit.GetVouchersForUser'),
+        '${apiUrl}deposit.GetVouchersForUser'),
     headers: {"Authorization": currentToken},
     body: body,
   );
@@ -36,7 +38,7 @@ Future<List<dynamic>> getUsedVouchersForUser(
 
   final response = await http.post(
     Uri.parse(
-        'https://staging-deposit-pqu2.encr.app/deposit.GetVouchersForUser'),
+        '${apiUrl}deposit.GetVouchersForUser'),
     headers: {"Authorization": currentToken},
     body: body,
   );
@@ -62,7 +64,7 @@ Future<List<dynamic>> getHistory(String? userPubKey, String? token) async {
   final body = jsonEncode({"UserPubKey": userPubKey});
 
   final response = await http.post(
-    Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.GetHistory'),
+    Uri.parse('${apiUrl}deposit.GetHistory'),
     headers: {"Authorization": currentToken},
     body: body,
   );
@@ -82,7 +84,7 @@ Future<bool> invalidateVoucher(String? voucherID, String? token) async {
 
   final response = await http.post(
     Uri.parse(
-        'https://staging-deposit-pqu2.encr.app/deposit.InvalidateVoucher'),
+        '${apiUrl}deposit.InvalidateVoucher'),
     headers: {"Authorization": currentToken},
     body: body,
   );
@@ -111,7 +113,7 @@ Future<Map<String, dynamic>> depositClaim(
   final body = jsonEncode({"DepositID": code, "UserPubKey": publicKey});
 
   final response = await http.post(
-    Uri.parse('https://staging-deposit-pqu2.encr.app/deposit.Claim'),
+    Uri.parse('${apiUrl}deposit.Claim'),
     headers: header,
     body: body,
   );
