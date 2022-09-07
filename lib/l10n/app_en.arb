@@ -138,5 +138,9 @@
     "logout": "Log out",
     "@logout": {
       "description": "Login > Account > Logout"
+    },
+    "notmail": "We're sorry, this is not a valid mail.",
+    "@notmail": {
+      "description": "Login > Account > My Profile > Wrong mail input"
     }
 }
