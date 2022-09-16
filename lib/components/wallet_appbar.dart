@@ -56,18 +56,18 @@ class _WalletAppBarState extends State<WalletAppBar> {
   Widget buttonsWallet(BuildContext context) {
     return Row(
       children: [
-        buttonWidget(
-          context,
-          "assets/images/scanIcon.png",
-          AppLocalizations.of(context)!.send,
-          UnderDevelopment(),
-        ),
-        buttonWidget(
-          context,
-          "assets/images/qrIcon.png",
-          AppLocalizations.of(context)!.receive,
-          UnderDevelopment(),
-        ),
+        // buttonWidget(
+        //   context,
+        //   "assets/images/scanIcon.png",
+        //   AppLocalizations.of(context)!.send,
+        //   UnderDevelopment(),
+        // ),
+        // buttonWidget(
+        //   context,
+        //   "assets/images/qrIcon.png",
+        //   AppLocalizations.of(context)!.receive,
+        //   UnderDevelopment(),
+        // ),
         buttonVouchers(
           context,
           "assets/images/voucherIcon.png",
