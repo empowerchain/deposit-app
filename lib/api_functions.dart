@@ -139,9 +139,7 @@ Future<dynamic> getPlasticRecord(
     body: body,
   );
   Map<String, dynamic> information = jsonDecode(response.body);
-  print(response.statusCode);
   if (response.statusCode == 200) {
-    print(information);
     return information;
   } else {
     return [];
