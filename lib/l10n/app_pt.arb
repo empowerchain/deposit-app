@@ -142,5 +142,9 @@
     "notmail": "O sentimos, este não é um mail válido.",
     "@notmail": {
       "description": "Login > Account > My Profile > Wrong mail input"
+    },
+    "total": "Total",
+    "@total": {
+      "description": "Login > Wallet"
     }
 }
