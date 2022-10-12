@@ -125,3 +125,25 @@ Future<Map<String, dynamic>> depositClaim(
     return {};
   }
 }
+
+// Gets the plastic waste record of people
+Future<dynamic> getPlasticRecord(
+    String? userPubKey, String? token) async {
+  String currentToken = "Bearer $token";
+  final body = jsonEncode({"user": userPubKey});
+
+  final response = await http.post(
+    Uri.parse(
+        '${apiUrl}stats.GetStats'),
+    headers: {"Authorization": currentToken},
+    body: body,
+  );
+  Map<String, dynamic> information = jsonDecode(response.body);
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    print(information);
+    return information;
+  } else {
+    return [];
+  }
+}
