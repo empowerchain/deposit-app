@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/views/sendMyProfile.dart';
@@ -39,7 +38,8 @@ class _MyProfileState extends State<MyProfile> {
   Widget shareButton(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (notMail) {
+        int organizations = UserSimplePreferences.getOrganization().length;
+        if (notMail || organizations == 0) {
           return;
         }
         String inputFirstName = firstName.text != ""
