@@ -11,11 +11,18 @@ class DropdownOrganizations extends StatefulWidget {
 
 class _DropdownOrganizationsState extends State<DropdownOrganizations> {
   List<String> organizations = UserSimplePreferences.getOrganization();
+  String chosenOrganization = "";
+
+  @override
+  void initState() {
+    super.initState();
+    chosenOrganization = organizations[0];
+  }
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      value: organizations[0],
+      value: chosenOrganization,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
       underline: Container(
@@ -25,7 +32,7 @@ class _DropdownOrganizationsState extends State<DropdownOrganizations> {
       onChanged: (String? value) {
         // This is called when the user selects an item.
         setState(() {
-          organizations[0] = value!;
+          chosenOrganization = value!;
         });
       },
       items: organizations.map<DropdownMenuItem<String>>((String value) {
