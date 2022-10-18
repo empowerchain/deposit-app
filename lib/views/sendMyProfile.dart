@@ -1,5 +1,5 @@
-// ignore: file_names
 import 'package:depositapp/classes/user_simple_preferences.dart';
+import 'package:depositapp/views/sendMyProfileDropdownMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -96,12 +96,7 @@ class _SendMyProfileState extends State<SendMyProfile> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text(
-              "Temporarily Not Available",
-              style: const TextStyle(
-                fontSize: 15,
-              ),
-            ),
+            DropdownOrganizations(),
           ],
         ),
         const SizedBox(
