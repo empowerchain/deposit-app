@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:depositapp/api_functions.dart';
 import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/views/sendMyProfile.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,17 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   bool notMail = false;
+  String publicKey = '';
+  String token = '';
+
+  @override
+  void initState() {
+    super.initState();
+    publicKey = UserSimplePreferences.getPublicKey();
+    token = UserSimplePreferences.getToken();
+    getOrganizationsByUser(publicKey, token);
+    
+  }
 
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
