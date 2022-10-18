@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:http/http.dart' as http;
 
 const apiUrl = "https://qa-deposit-pqu2.encr.app/"; // QA url
@@ -10,7 +11,8 @@ Future<List<dynamic>> getVouchersForUser(
 
   final response = await http.post(
     Uri.parse(
-        '${apiUrl}deposit.GetVouchersForUser'),
+      '${apiUrl}deposit.GetVouchersForUser',
+    ),
     headers: {"Authorization": currentToken},
     body: body,
   );
@@ -38,7 +40,8 @@ Future<List<dynamic>> getUsedVouchersForUser(
 
   final response = await http.post(
     Uri.parse(
-        '${apiUrl}deposit.GetVouchersForUser'),
+      '${apiUrl}deposit.GetVouchersForUser',
+    ),
     headers: {"Authorization": currentToken},
     body: body,
   );
@@ -64,7 +67,9 @@ Future<List<dynamic>> getHistory(String? userPubKey, String? token) async {
   final body = jsonEncode({"UserPubKey": userPubKey});
 
   final response = await http.post(
-    Uri.parse('${apiUrl}deposit.GetHistory'),
+    Uri.parse(
+      '${apiUrl}deposit.GetHistory',
+    ),
     headers: {"Authorization": currentToken},
     body: body,
   );
@@ -84,7 +89,8 @@ Future<bool> invalidateVoucher(String? voucherID, String? token) async {
 
   final response = await http.post(
     Uri.parse(
-        '${apiUrl}deposit.InvalidateVoucher'),
+      '${apiUrl}deposit.InvalidateVoucher',
+    ),
     headers: {"Authorization": currentToken},
     body: body,
   );
@@ -113,7 +119,9 @@ Future<Map<String, dynamic>> depositClaim(
   final body = jsonEncode({"DepositID": code, "UserPubKey": publicKey});
 
   final response = await http.post(
-    Uri.parse('${apiUrl}deposit.Claim'),
+    Uri.parse(
+      '${apiUrl}deposit.Claim',
+    ),
     headers: header,
     body: body,
   );
@@ -127,19 +135,51 @@ Future<Map<String, dynamic>> depositClaim(
 }
 
 // Gets the plastic waste record of people
-Future<dynamic> getPlasticRecord(
+Future<dynamic> getPlasticRecord(String? userPubKey, String? token) async {
+  String currentToken = "Bearer $token";
+  final body = jsonEncode({"user": userPubKey});
+
+  final response = await http.post(
+    Uri.parse(
+      '${apiUrl}stats.GetStats',
+    ),
+    headers: {"Authorization": currentToken},
+    body: body,
+  );
+  Map<String, dynamic> information = jsonDecode(response.body);
+  if (response.statusCode == 200) {
+    return information;
+  } else {
+    return [];
+  }
+}
+
+// Gets the plastic waste record of people
+Future<dynamic> getOrganizationsByUser(
     String? userPubKey, String? token) async {
   String currentToken = "Bearer $token";
   final body = jsonEncode({"user": userPubKey});
 
   final response = await http.post(
     Uri.parse(
-        '${apiUrl}stats.GetStats'),
+      '${apiUrl}stats.GetOrganizationsByUser',
+    ),
     headers: {"Authorization": currentToken},
     body: body,
   );
   Map<String, dynamic> information = jsonDecode(response.body);
   if (response.statusCode == 200) {
+    List<dynamic> depositOrgsForUser = information["depositOrgsForUser"];
+    List<String> organizationIdList = [];
+    List<String> organizationNameList = [];
+    for (final item in depositOrgsForUser) {
+      String organizationId = item["organizationId"];
+      String organizationName = item["organizationName"];
+      organizationIdList.add(organizationId);
+      organizationNameList.add(organizationName);
+    }
+    UserSimplePreferences.setOrganizationList(organizationNameList);
+    UserSimplePreferences.setOrganizationIdList(organizationIdList);
     return information;
   } else {
     return [];
