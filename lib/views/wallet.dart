@@ -23,12 +23,11 @@ class _WalletState extends State<Wallet> {
     super.initState();
     publicKey = UserSimplePreferences.getPublicKey();
     token = UserSimplePreferences.getToken();
-    dynamic information = getPlasticRecord(publicKey, token).then((value) {
+    getPlasticRecord(publicKey, token).then((value) {
       List<dynamic> depositAmounts = value["depositAmounts"];
       double collectedPlastic = 0;
       for (var item in depositAmounts) {
         collectedPlastic += item["amount"];
-        print(collectedPlastic);
       }
       setState(() {
         kilosCollected= collectedPlastic;

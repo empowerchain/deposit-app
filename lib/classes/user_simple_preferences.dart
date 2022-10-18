@@ -9,6 +9,8 @@ class UserSimplePreferences {
   static const _keyPublicKey = 'public-key';
   static const _keyToken = 'token';
   static const _keyUsername = 'username';
+  static const _keyOrganization = 'organization';
+  static const _keyOrganizationId = 'organizationId';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -34,6 +36,14 @@ class UserSimplePreferences {
   static Future setUsername(String username) async =>
       await _preferences.setString(_keyUsername, username);
 
+  static Future setOrganizationList(List<String> organization) async {
+      await _preferences.setStringList(_keyOrganization, organization);
+    }
+
+  static Future setOrganizationIdList(List<String> organizationId) async {
+      await _preferences.setStringList(_keyOrganizationId, organizationId);
+    }
+
   static String getLastName() => _preferences.getString(_keyLastName) ?? '';
   static String getLocale() => _preferences.getString(_keyLocale) ?? '';
   static String getMail() => _preferences.getString(_keyMail) ?? '';
@@ -41,6 +51,8 @@ class UserSimplePreferences {
   static String getPublicKey() => _preferences.getString(_keyPublicKey) ?? '';
   static String getToken() => _preferences.getString(_keyToken) ?? '';
   static String getUsername() => _preferences.getString(_keyUsername) ?? '';
+  static List<String> getOrganization() => _preferences.getStringList(_keyOrganization) ?? [];
+  static List<String> getOrganizationId() => _preferences.getStringList(_keyOrganizationId) ?? [];
 
   static Future clear() async {
     await _preferences.remove(_keyMail);
