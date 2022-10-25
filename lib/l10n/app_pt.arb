@@ -146,5 +146,17 @@
     "total": "Total",
     "@total": {
       "description": "Login > Wallet"
+    },
+    "useSeedphrase": "Importar frase-semente",
+    "@useSeedphrase": {
+      "description": "Login > Seedphrase"
+    },
+    "writeSeedphrase": "Escreva seu frase-semente",
+    "@writeSeedphrase": {
+      "description": "Login > Wallet"
+    },
+    "notSeedphrase": "Por favor escreva uma frase-semente válida",
+    "@notSeedphrase": {
+      "description": "Login > Wallet > Seedphrase > Error"
     }
 }

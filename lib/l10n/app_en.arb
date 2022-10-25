@@ -146,5 +146,17 @@
     "total": "Total",
     "@total": {
       "description": "Login > Wallet"
+    },
+    "useSeedphrase": "Import seedphrase",
+    "@useSeedphrase": {
+      "description": "Login > Seedphrase"
+    },
+    "writeSeedphrase": "Write your seedphrase",
+    "@writeSeedphrase": {
+      "description": "Login > Wallet"
+    },
+    "notSeedphrase": "Please write a valid seedphrase",
+    "@notSeedphrase": {
+      "description": "Login > Wallet > Seedphrase > Error"
     }
 }
