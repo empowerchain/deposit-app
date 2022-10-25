@@ -54,7 +54,6 @@ class _SendMyProfileState extends State<SendMyProfile> {
                 output["email"] = widget.email;
                 UserSimplePreferences.setMail(widget.email);
               }
-              print(output);
             },
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -83,10 +82,10 @@ class _SendMyProfileState extends State<SendMyProfile> {
     return Row(
       children: [
         const SizedBox(width: 20.0),
-        Expanded(
+        const Expanded(
             child: Text(
           "Organization",
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 15,
           ),
         )),
@@ -95,7 +94,7 @@ class _SendMyProfileState extends State<SendMyProfile> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
+          children: const <Widget>[
             DropdownOrganizations(),
           ],
         ),
