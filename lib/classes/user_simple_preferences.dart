@@ -11,9 +11,13 @@ class UserSimplePreferences {
   static const _keyUsername = 'username';
   static const _keyOrganization = 'organization';
   static const _keyOrganizationId = 'organizationId';
+  static const _keyAddress = 'address';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
+
+  static Future setAddress(String address) async =>
+      await _preferences.setString(_keyAddress, address);
 
   static Future setLastName(String lastName) async =>
       await _preferences.setString(_keyLastName, lastName);
@@ -44,6 +48,7 @@ class UserSimplePreferences {
       await _preferences.setStringList(_keyOrganizationId, organizationId);
     }
 
+  static String getAddress() => _preferences.getString(_keyAddress) ?? '';
   static String getLastName() => _preferences.getString(_keyLastName) ?? '';
   static String getLocale() => _preferences.getString(_keyLocale) ?? '';
   static String getMail() => _preferences.getString(_keyMail) ?? '';
@@ -51,6 +56,7 @@ class UserSimplePreferences {
   static String getPublicKey() => _preferences.getString(_keyPublicKey) ?? '';
   static String getToken() => _preferences.getString(_keyToken) ?? '';
   static String getUsername() => _preferences.getString(_keyUsername) ?? '';
+  
   static List<String> getOrganization() => _preferences.getStringList(_keyOrganization) ?? [];
   static List<String> getOrganizationId() => _preferences.getStringList(_keyOrganizationId) ?? [];
 
