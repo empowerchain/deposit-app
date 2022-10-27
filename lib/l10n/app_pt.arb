@@ -151,12 +151,36 @@
     "@useSeedphrase": {
       "description": "Login > Seedphrase"
     },
+    "createSeedphrase": "Crear frase-semente",
+    "@createSeedphrase": {
+      "description": "Login > Wallet"
+    },
     "writeSeedphrase": "Escreva seu frase-semente",
     "@writeSeedphrase": {
       "description": "Login > Wallet"
     },
     "notSeedphrase": "Por favor escreva uma frase-semente válida",
     "@notSeedphrase": {
-      "description": "Login > Wallet > Seedphrase > Error"
+      "description": "Login > Wallet > Import Seedphrase > Error"
+    },
+    "alertSeedphrase": "Por favor escreva e guarde seu frase-semente para no esquecê-la.",
+    "@alertSeedphrase": {
+      "description": "Login > Wallet > Create Seedphrase > Warning"
+    },
+    "alertSeedphrase2": "Após do accesar, Empower não salvará sua frase-semente no telefone nem poderá visualizá-la novamente",
+    "@alertSeedphrase2": {
+      "description": "Login > Wallet > Create Seedphrase > Warning"
+    },
+    "continueSeedphrase": "Continuar",
+    "@continueSeedphrase": {
+      "description": "Login > Wallet > Create Seedphrase > Warning > Continue"
+    },
+    "copySeedphrase": "Copiar frase-semente",
+    "@updateSeedphrase": {
+      "description": "Login > Wallet > Create Seedphrase > Copy"
+    },
+    "changeSeedphrase": "Mudar frase-semente",
+    "@changeSeedphrase": {
+      "description": "Login > Wallet > Create Seedphrase > Change"
     }
 }
