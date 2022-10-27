@@ -4,16 +4,16 @@ import 'package:depositapp/crypto_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SeedphraseView extends StatefulWidget {
-  const SeedphraseView({
+class SeedphraseImport extends StatefulWidget {
+  const SeedphraseImport({
     super.key,
   });
 
   @override
-  State<SeedphraseView> createState() => _SeedphraseViewState();
+  State<SeedphraseImport> createState() => _SeedphraseImportState();
 }
 
-class _SeedphraseViewState extends State<SeedphraseView> {
+class _SeedphraseImportState extends State<SeedphraseImport> {
   bool notSeedphrase = false;
   String seed = '';
   TextEditingController seedphraseController = TextEditingController();
@@ -89,20 +89,23 @@ class _SeedphraseViewState extends State<SeedphraseView> {
             const SizedBox(
               height: 40.0,
             ),
-            Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: TextField(
-                  controller: seedphraseController,
-                  minLines: 7,
-                  maxLines: 7,
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    hintText: AppLocalizations.of(context)!.writeSeedphrase,
+            Container(
+              height: 250,
+              child: Expanded(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  child: TextField(
+                    controller: seedphraseController,
+                    minLines: 7,
+                    maxLines: 7,
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText: AppLocalizations.of(context)!.writeSeedphrase,
+                    ),
                   ),
                 ),
               ),
