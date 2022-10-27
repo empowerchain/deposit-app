@@ -1,6 +1,7 @@
 import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/crypto_functions.dart';
-import 'package:depositapp/views/seedphraseView.dart';
+import 'package:depositapp/views/seedphraseCreate.dart';
+import 'package:depositapp/views/seedphraseImport.dart';
 import 'package:flutter/material.dart';
 import 'dart:collection';
 import 'dart:async';
@@ -162,7 +163,7 @@ class _Web3Register extends State<Web3Register> {
                       const Color.fromRGBO(104, 223, 87, 1)),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.doneLogin,
+                  AppLocalizations.of(context)!.login,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
@@ -172,7 +173,7 @@ class _Web3Register extends State<Web3Register> {
             ),
           ),
           const Padding(
-            padding: const EdgeInsets.only(bottom: 10.0),
+            padding: EdgeInsets.only(bottom: 10.0),
             child: SizedBox(height: 5),
           ),
           const SizedBox(
@@ -186,7 +187,7 @@ class _Web3Register extends State<Web3Register> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SeedphraseView()),
+                    MaterialPageRoute(builder: (context) => const SeedphraseImport()),
                   );
                 },
                 style: ButtonStyle(
@@ -200,6 +201,43 @@ class _Web3Register extends State<Web3Register> {
                 ),
                 child: Text(
                   AppLocalizations.of(context)!.useSeedphrase,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: SizedBox(height: 5),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            width: 300.0, // <-- match_parent
+            height: 50.0, // <-
+            child: SizedBox.expand(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SeedphraseCreate()),
+                  );
+                },
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    ),
+                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromRGBO(104, 223, 87, 1)),
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.createSeedphrase,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20.0,
