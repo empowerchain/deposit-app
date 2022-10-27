@@ -4,8 +4,8 @@ import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:elliptic/elliptic.dart';
 import 'package:ecdsa/ecdsa.dart';
 import 'package:crypto/crypto.dart';
-// import 'package:rsa_encrypt/rsa_encrypt.dart';
-// import 'package:pointycastle/api.dart' as crypto;
+// ignore: depend_on_referenced_packages
+import 'package:bip39/bip39.dart' as bip39;
 
 String createToken(String privKey) {
   var ec = getS256();
@@ -65,14 +65,24 @@ String empowerAddress(List<String> mnemonic) {
     host: 'localhost',
   );
 
-  try{
+  try {
     final wallet = Wallet.derive(mnemonic, networkInfo);
     UserSimplePreferences.setAddress(wallet.bech32Address);
     
-
     return wallet.bech32Address;
-  }
-  catch(Exception){
+  } catch (Exception) {
     return "";
   }
+}
+
+List<String> generateSeedphrase() {
+  final networkInfo = NetworkInfo.fromSingleHost(
+    bech32Hrp: 'empower',
+    host: 'localhost',
+  );
+
+  List<String> randomMnemonic = bip39.generateMnemonic().split(" ");
+  final wallet = Wallet.derive(randomMnemonic, networkInfo);
+  UserSimplePreferences.setAddress(wallet.bech32Address);
+  return randomMnemonic;
 }
