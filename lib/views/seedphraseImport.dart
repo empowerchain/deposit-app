@@ -3,6 +3,7 @@ import 'package:depositapp/classes/user_simple_preferences.dart';
 import 'package:depositapp/crypto_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bip39/bip39.dart' as bip39;
 
 class SeedphraseImport extends StatefulWidget {
   const SeedphraseImport({
@@ -24,7 +25,7 @@ class _SeedphraseImportState extends State<SeedphraseImport> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 70.0,
           ),
           ElevatedButton(
@@ -32,12 +33,20 @@ class _SeedphraseImportState extends State<SeedphraseImport> {
               List<String> mnemonic = seedphraseController.text.split(' ');
               String address = empowerAddress(mnemonic);
               print(address);
-              if (address == ' ') {
+              if (address == '') {
                 setState(() {
                   notSeedphrase = true;
                 });
               } else {
+                var entropy = bip39.mnemonicToSeedHex(mnemonic.join(" "));
+                print(entropy);
+                print(mnemonic.join(" "));
+                
+                // String bits = entropy;
+
+                empowerAddress(mnemonic);
                 setState(() {
+                  notSeedphrase = false;  
                   seed = address;
                 });
               }
@@ -111,15 +120,16 @@ class _SeedphraseImportState extends State<SeedphraseImport> {
               ),
             ),
             Container(
+              height: 20,
               child: notSeedphrase
-                  ? Text(seed) : Text(
+                  ? Text(
                       AppLocalizations.of(context)!.notSeedphrase,
                       style: const TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
-                    ),
+                    ) : SizedBox(),
             ),
             sendButton(context),
             const SizedBox(
