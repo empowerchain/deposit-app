@@ -179,73 +179,73 @@ class _Web3Register extends State<Web3Register> {
           const SizedBox(
             height: 20,
           ),
-          SizedBox(
-            width: 300.0, // <-- match_parent
-            height: 50.0, // <-
-            child: SizedBox.expand(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SeedphraseImport()),
-                  );
-                },
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromRGBO(104, 223, 87, 1)),
-                ),
-                child: Text(
-                  AppLocalizations.of(context)!.useSeedphrase,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
-            child: SizedBox(height: 5),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: 300.0, // <-- match_parent
-            height: 50.0, // <-
-            child: SizedBox.expand(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SeedphraseCreate()),
-                  );
-                },
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0),
-                    ),
-                  ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromRGBO(104, 223, 87, 1)),
-                ),
-                child: Text(
-                  AppLocalizations.of(context)!.createSeedphrase,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // SizedBox(
+          //   width: 300.0, // <-- match_parent
+          //   height: 50.0, // <-
+          //   child: SizedBox.expand(
+          //     child: ElevatedButton(
+          //       onPressed: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => const SeedphraseImport()),
+          //         );
+          //       },
+          //       style: ButtonStyle(
+          //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          //           RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(0),
+          //           ),
+          //         ),
+          //         backgroundColor: MaterialStateProperty.all<Color>(
+          //             const Color.fromRGBO(104, 223, 87, 1)),
+          //       ),
+          //       child: Text(
+          //         AppLocalizations.of(context)!.useSeedphrase,
+          //         style: const TextStyle(
+          //           fontWeight: FontWeight.bold,
+          //           fontSize: 20.0,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // const Padding(
+          //   padding: EdgeInsets.only(bottom: 10.0),
+          //   child: SizedBox(height: 5),
+          // ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
+          // SizedBox(
+          //   width: 300.0, // <-- match_parent
+          //   height: 50.0, // <-
+          //   child: SizedBox.expand(
+          //     child: ElevatedButton(
+          //       onPressed: () {
+          //         Navigator.push(
+          //           context,
+          //           MaterialPageRoute(builder: (context) => const SeedphraseCreate()),
+          //         );
+          //       },
+          //       style: ButtonStyle(
+          //         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          //           RoundedRectangleBorder(
+          //             borderRadius: BorderRadius.circular(0),
+          //           ),
+          //         ),
+          //         backgroundColor: MaterialStateProperty.all<Color>(
+          //             const Color.fromRGBO(104, 223, 87, 1)),
+          //       ),
+          //       child: Text(
+          //         AppLocalizations.of(context)!.createSeedphrase,
+          //         style: const TextStyle(
+          //           fontWeight: FontWeight.bold,
+          //           fontSize: 20.0,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -263,7 +263,8 @@ class _Web3Register extends State<Web3Register> {
         var email = response.userInfo!.email.toString();
         var name = response.userInfo!.name.toString();
         String authToken = createToken(privKey);
-
+        
+        await UserSimplePreferences.setAddress("empower"); //requires fix
         await UserSimplePreferences.setLocale(name);
         await UserSimplePreferences.setMail(email);
         await UserSimplePreferences.setName(name);
